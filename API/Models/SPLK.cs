@@ -26,16 +26,16 @@ namespace API.Models
         [Required, Column("status")]
         public Status Status { get; set; }
 
-        [Required, Column("bukti")]
-        public Blob Bukti { get; set; }
+        [Column("proof_overtime")]
+        public byte[] ProofOvertime { get; set; }
 
-        [Column("jml_jam")]
+        [Column("hours_of_ot")]
         public int JmlJam { get; set; }
 
-        [Column("upah_lembur")]
+        [Column("salary_ot")]
         public double UpahLembur { get; set; }
 
-        [Column("tgl_selesai")]
+        [Column("end_date_approval")]
         public DateTime TglSelesai { get; set; }
 
         //RELATION

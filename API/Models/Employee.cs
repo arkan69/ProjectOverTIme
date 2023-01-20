@@ -28,7 +28,7 @@ namespace API.Models
 
         [Required, Column("gender")]
         public Gender Gender { get; set; }
-        public int? ManagerId { get; set; }
+        public string? ManagerId { get; set; }
         public int DepartmentId { get; set; }
         public int SplkId { get; set; }
 
@@ -44,7 +44,7 @@ namespace API.Models
         [JsonIgnore]
         public SPLK? Splk { get; set; }
 
-        [ForeignKey("Manager")]
+        [ForeignKey("ManagerId")]
         [JsonIgnore]
         public virtual Employee Manager { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
