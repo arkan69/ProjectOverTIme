@@ -35,10 +35,20 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">ORAS</div>
+               @* <div class="sidebar-brand-icon rotate-n-15">
+                     <i class="fas fa-laugh-wink"></i> 
+                    <!-- <img src="img/ors_logo.png" alt="" /> -->
+
+                </div>*@
+                <picture>
+                    <source media="(min-width: 650px)"
+                            srcset="img/ors_logo.png">
+                    <source media="(min-width: 465px)"
+                            srcset="img/ors_logo_only.png">
+                    <img src="img/ors_logo.png"
+                         alt="ORS">
+                </picture>
+                @*<div class="sidebar-brand-text mx-3"></div>*@
             </a>
 
             <!-- Divider -->

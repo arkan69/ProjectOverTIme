@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Merveil\\Documents\\GitHub\\ProjectOverTIme\\API\\API.csproj": {}
+    "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Merveil\\Documents\\GitHub\\ProjectOverTIme\\API\\API.csproj": {
+    "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Merveil\\Documents\\GitHub\\ProjectOverTIme\\API\\API.csproj",
+        "projectUniqueName": "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Merveil\\Documents\\GitHub\\ProjectOverTIme\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\Merveil\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Merveil\\Documents\\GitHub\\ProjectOverTIme\\API\\obj\\",
+        "projectPath": "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\Theo\\.nuget\\packages\\",
+        "outputPath": "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Merveil\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Theo\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
