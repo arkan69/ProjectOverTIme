@@ -1,16 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection.Metadata;
+using System.Text.Json.Serialization;
 
 namespace API.Models
 {
+    [Table("tb_m_splk")]
     public class SPLK
     {
         [Key, Column("id")]
         public int Id { get; set; }
 
         [Required, Column("lembur_id")]
-        public int LemburID { get; set; }
+        public OvertimeType OvertimeType { get; set; }
 
         [Required, Column("start_date")]
         public DateTime StartDate { get; set; }
@@ -36,6 +38,10 @@ namespace API.Models
         [Column("tgl_selesai")]
         public DateTime TglSelesai { get; set; }
 
+        //RELATION
+        [JsonIgnore]
+        public Employee? Employees { get; set; }
+
     }
     public enum Status
     {
@@ -43,5 +49,10 @@ namespace API.Models
         Refuse,
         Approved,
         Done
+    }
+    public enum OvertimeType
+    {
+        Weekdays,
+        Weekend
     }
 }

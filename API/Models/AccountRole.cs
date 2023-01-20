@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.Models
 {
@@ -15,5 +16,14 @@ namespace API.Models
 
         [Required, Column("role_id")]
         public int RoleId { get; set; }
+
+        // Relation
+        [ForeignKey("AccountNIK")]
+        [JsonIgnore]
+        public Account? Account { get; set; }
+
+        [ForeignKey("RoleId")]
+        [JsonIgnore]
+        public Role? Role { get; set; }
     }
 }

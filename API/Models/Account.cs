@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace API.Models
 {
@@ -14,5 +15,12 @@ namespace API.Models
 
         [Required, Column("password")]
         public string Password { get; set; }
+
+        // Relation
+        [JsonIgnore]
+        public Employee? Employee { get; set; }
+
+        [JsonIgnore]
+        public ICollection<AccountRole>? AccountRoles { get; set; }
     }
 }
