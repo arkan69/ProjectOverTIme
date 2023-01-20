@@ -1,13 +1,13 @@
 ﻿using API.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Win32;
 
-namespace API.Context
+namespace API.Contexts
 {
-    public class MyContexts : DbContext
+    public class MyContext : DbContext
     {
-        public MyContexts(DbContextOptions<MyContexts> options) :base (options)
-        { 
+        public MyContext(DbContextOptions<MyContext> options) : base(options)
+        {
+
         }
 
         // Introduces the Model to the Database that eventually becomes an Entity
