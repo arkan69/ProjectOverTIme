@@ -84,6 +84,17 @@ builder.Services.AddSwaggerGen(option =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin();//jika sudah ada website maka ganti allowany dengan with
+            policy.AllowAnyHeader();//jika sudah ada website ganti allowany dengan with
+            policy.AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
