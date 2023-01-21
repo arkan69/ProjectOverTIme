@@ -12,7 +12,7 @@ namespace API.ViewModels
         public int Salary { get; set; }
         public Gender Gender { get; set; }
         public string ManagerId { get; set; }
-        public string DepartmnetID { get; set; }
+        public int DepartmnetID { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }
