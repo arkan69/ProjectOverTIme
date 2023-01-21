@@ -46,8 +46,9 @@ namespace API.Models
 
         [ForeignKey("ManagerId")]
         [JsonIgnore]
-        public virtual Employee Manager { get; set; }
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual Employee? Manager { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Employee>? Employees { get; set; }
     }
 
     public enum Gender
