@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace API.Migrations
 {
     /// <inheritdoc />
-    public partial class initialmigration : Migration
+    public partial class inititalmigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,27 +39,6 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "tb_m_splk",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    lemburid = table.Column<int>(name: "lembur_id", type: "int", nullable: false),
-                    startdate = table.Column<DateTime>(name: "start_date", type: "datetime2", nullable: false),
-                    enddate = table.Column<DateTime>(name: "end_date", type: "datetime2", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    status = table.Column<int>(type: "int", nullable: false),
-                    proofovertime = table.Column<byte[]>(name: "proof_overtime", type: "varbinary(max)", nullable: false),
-                    hoursofot = table.Column<int>(name: "hours_of_ot", type: "int", nullable: false),
-                    salaryot = table.Column<double>(name: "salary_ot", type: "float", nullable: false),
-                    enddateapproval = table.Column<DateTime>(name: "end_date_approval", type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tb_m_splk", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "tb_m_employees",
                 columns: table => new
                 {
@@ -70,31 +49,24 @@ namespace API.Migrations
                     birthdate = table.Column<DateTime>(name: "birth_date", type: "datetime2", nullable: false),
                     salary = table.Column<int>(type: "int", nullable: false),
                     gender = table.Column<int>(type: "int", nullable: false),
-                    ManagerId = table.Column<string>(type: "nchar(5)", nullable: true),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
-                    SplkId = table.Column<int>(type: "int", nullable: false)
+                    managerid = table.Column<string>(name: "manager_id", type: "nchar(5)", nullable: true),
+                    departmentid = table.Column<int>(name: "department_id", type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tb_m_employees", x => x.nik);
                     table.UniqueConstraint("AK_tb_m_employees_phone", x => x.phone);
                     table.ForeignKey(
-                        name: "FK_tb_m_employees_tb_m_departments_DepartmentId",
-                        column: x => x.DepartmentId,
+                        name: "FK_tb_m_employees_tb_m_departments_department_id",
+                        column: x => x.departmentid,
                         principalTable: "tb_m_departments",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_tb_m_employees_tb_m_employees_ManagerId",
-                        column: x => x.ManagerId,
+                        name: "FK_tb_m_employees_tb_m_employees_manager_id",
+                        column: x => x.managerid,
                         principalTable: "tb_m_employees",
                         principalColumn: "nik");
-                    table.ForeignKey(
-                        name: "FK_tb_m_employees_tb_m_splk_SplkId",
-                        column: x => x.SplkId,
-                        principalTable: "tb_m_splk",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -111,6 +83,34 @@ namespace API.Migrations
                     table.UniqueConstraint("AK_tb_m_accounts_email", x => x.email);
                     table.ForeignKey(
                         name: "FK_tb_m_accounts_tb_m_employees_nik",
+                        column: x => x.nik,
+                        principalTable: "tb_m_employees",
+                        principalColumn: "nik",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "tb_m_splk",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nik = table.Column<string>(type: "nchar(5)", nullable: false),
+                    lemburid = table.Column<int>(name: "lembur_id", type: "int", nullable: false),
+                    startdate = table.Column<DateTime>(name: "start_date", type: "datetime2", nullable: false),
+                    enddate = table.Column<DateTime>(name: "end_date", type: "datetime2", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
+                    proofovertime = table.Column<byte[]>(name: "proof_overtime", type: "varbinary(max)", nullable: false),
+                    hoursofot = table.Column<int>(name: "hours_of_ot", type: "int", nullable: false),
+                    salaryot = table.Column<double>(name: "salary_ot", type: "float", nullable: false),
+                    enddateapproval = table.Column<DateTime>(name: "end_date_approval", type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tb_m_splk", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_tb_m_splk_tb_m_employees_nik",
                         column: x => x.nik,
                         principalTable: "tb_m_employees",
                         principalColumn: "nik",
@@ -144,20 +144,19 @@ namespace API.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_m_employees_DepartmentId",
+                name: "IX_tb_m_employees_department_id",
                 table: "tb_m_employees",
-                column: "DepartmentId");
+                column: "department_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_m_employees_ManagerId",
+                name: "IX_tb_m_employees_manager_id",
                 table: "tb_m_employees",
-                column: "ManagerId");
+                column: "manager_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_tb_m_employees_SplkId",
-                table: "tb_m_employees",
-                column: "SplkId",
-                unique: true);
+                name: "IX_tb_m_splk_nik",
+                table: "tb_m_splk",
+                column: "nik");
 
             migrationBuilder.CreateIndex(
                 name: "IX_tb_r_accounts_roles_account_nik",
@@ -174,6 +173,9 @@ namespace API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "tb_m_splk");
+
+            migrationBuilder.DropTable(
                 name: "tb_r_accounts_roles");
 
             migrationBuilder.DropTable(
@@ -187,9 +189,6 @@ namespace API.Migrations
 
             migrationBuilder.DropTable(
                 name: "tb_m_departments");
-
-            migrationBuilder.DropTable(
-                name: "tb_m_splk");
         }
     }
 }

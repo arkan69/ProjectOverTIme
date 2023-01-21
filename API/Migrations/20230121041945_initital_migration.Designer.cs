@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230120132608_initial_migration")]
-    partial class initialmigration
+    [Migration("20230121041945_initital_migration")]
+    partial class inititalmigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -112,7 +112,8 @@ namespace API.Migrations
                         .HasColumnName("birth_date");
 
                     b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("department_id");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -131,7 +132,8 @@ namespace API.Migrations
                         .HasColumnName("last_name");
 
                     b.Property<string>("ManagerId")
-                        .HasColumnType("nchar(5)");
+                        .HasColumnType("nchar(5)")
+                        .HasColumnName("manager_id");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -143,9 +145,6 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("salary");
 
-                    b.Property<int>("SplkId")
-                        .HasColumnType("int");
-
                     b.HasKey("NIK");
 
                     b.HasAlternateKey("Phone");
@@ -153,9 +152,6 @@ namespace API.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.HasIndex("ManagerId");
-
-                    b.HasIndex("SplkId")
-                        .IsUnique();
 
                     b.ToTable("tb_m_employees");
                 });
@@ -202,6 +198,11 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .HasColumnName("hours_of_ot");
 
+                    b.Property<string>("NIK")
+                        .IsRequired()
+                        .HasColumnType("nchar(5)")
+                        .HasColumnName("nik");
+
                     b.Property<int>("OvertimeType")
                         .HasColumnType("int")
                         .HasColumnName("lembur_id");
@@ -228,6 +229,8 @@ namespace API.Migrations
                         .HasColumnName("salary_ot");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NIK");
 
                     b.ToTable("tb_m_splk");
                 });
@@ -274,17 +277,20 @@ namespace API.Migrations
                         .WithMany("Employees")
                         .HasForeignKey("ManagerId");
 
-                    b.HasOne("API.Models.SPLK", "Splk")
-                        .WithOne("Employees")
-                        .HasForeignKey("API.Models.Employee", "SplkId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Department");
 
                     b.Navigation("Manager");
+                });
 
-                    b.Navigation("Splk");
+            modelBuilder.Entity("API.Models.SPLK", b =>
+                {
+                    b.HasOne("API.Models.Employee", "Employees")
+                        .WithMany("Splks")
+                        .HasForeignKey("NIK")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("API.Models.Account", b =>
@@ -302,16 +308,13 @@ namespace API.Migrations
                     b.Navigation("Account");
 
                     b.Navigation("Employees");
+
+                    b.Navigation("Splks");
                 });
 
             modelBuilder.Entity("API.Models.Role", b =>
                 {
                     b.Navigation("AccountRoles");
-                });
-
-            modelBuilder.Entity("API.Models.SPLK", b =>
-                {
-                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

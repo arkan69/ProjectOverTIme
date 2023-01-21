@@ -28,9 +28,9 @@ namespace API.Base
                     ? Ok(new { statusCode = 200, message = "Data Not Found!" })
                     : Ok(result);
             }
-            catch
+            catch(Exception ex)
             {
-                return BadRequest(new { statusCode = 500, message = "Something Wrong!!" });
+                return BadRequest(new { statusCode = 500, message = "Something Wrong!! " +ex});
             }
         }
 

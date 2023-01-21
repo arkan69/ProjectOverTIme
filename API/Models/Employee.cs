@@ -28,9 +28,12 @@ namespace API.Models
 
         [Required, Column("gender")]
         public Gender Gender { get; set; }
+
+        [Column("manager_id")]
         public string? ManagerId { get; set; }
+
+        [Column("department_id")]
         public int DepartmentId { get; set; }
-        public int SplkId { get; set; }
 
         // Relation
         [JsonIgnore]
@@ -40,9 +43,8 @@ namespace API.Models
         [JsonIgnore]
         public Department? Department { get; set; }
 
-        [ForeignKey("SplkId")]
         [JsonIgnore]
-        public SPLK? Splk { get; set; }
+        public ICollection<SPLK>? Splks { get; set; }
 
         [ForeignKey("ManagerId")]
         [JsonIgnore]

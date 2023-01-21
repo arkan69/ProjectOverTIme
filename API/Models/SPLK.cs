@@ -11,6 +11,9 @@ namespace API.Models
         [Key, Column("id")]
         public int Id { get; set; }
 
+        [Column("nik", TypeName = "nchar(5)")]
+        public string NIK { get; set; }
+
         [Required, Column("lembur_id")]
         public OvertimeType OvertimeType { get; set; }
 
@@ -27,7 +30,7 @@ namespace API.Models
         public Status Status { get; set; }
 
         [Column("proof_overtime")]
-        public byte[] ProofOvertime { get; set; }
+        public byte[]? ProofOvertime { get; set; }
 
         [Column("hours_of_ot")]
         public int JmlJam { get; set; }
@@ -39,6 +42,7 @@ namespace API.Models
         public DateTime TglSelesai { get; set; }
 
         //RELATION
+        [ForeignKey("NIK")]
         [JsonIgnore]
         public Employee? Employees { get; set; }
 
