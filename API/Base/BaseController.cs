@@ -1,4 +1,5 @@
 ﻿using API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations;
@@ -7,6 +8,8 @@ namespace API.Base
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles ="Employee")]
+    [Authorize]
     public class BaseController<Entity,T,X> : ControllerBase
         where Entity : class
         where X : IRepository<Entity,T>

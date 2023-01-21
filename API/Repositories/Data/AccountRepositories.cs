@@ -132,5 +132,19 @@ namespace API.Repositories.Data
             }
             return 2;
         }
+
+        public List<string> UserRoles(string email)
+        {
+            //{"Employee","Manager","Admin"}
+            //List<string> result = new List<string>();
+
+            List<string> result = (from em in _employees
+                                   join a in _account on em.NIK equals a.NIK
+                                   join ar in _context.AccountRoles on a.NIK equals ar.AccountNIK
+                                   join r in _context.Roles on ar.RoleId equals r.Id
+                                   where a.Email == email
+                                   select r.Name).ToList();
+            return result;
+        }
     }
 }

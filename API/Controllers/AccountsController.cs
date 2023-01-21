@@ -14,6 +14,7 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles = "Employee")]
     public class AccountsController : BaseController<Account, string, AccountRepositories>
     {
         private AccountRepositories _accrepositories;
@@ -24,7 +25,7 @@ namespace API.Controllers
             _confi = confi;
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost, Route("Register")]
         public ActionResult GetRegis(RegisterVM registerVM)
         {
@@ -68,10 +69,35 @@ namespace API.Controllers
                         return Ok(new { statusCode = 200, message = "Account Not Found" });
                     case 1:
                         return Ok(new { statusCode = 200, message = "Password Incorrect" });
-                    case 2:
-                        return Ok(new { statusCode = 200, message = "Login Success" });
                     default:
-                        return Ok(new { statusCode = 200, message = "Failed Login" });
+                        //creat method to get user role when the user log in
+                        var roles = _accrepositories.UserRoles(login.Email);
+
+                        var claims = new List<Claim>()
+                        {
+                            new Claim("email", login.Email),
+                            //new Claim(ClaimTypes.Email, login.Email),
+                        };
+
+                        foreach (var item in roles)
+                        {
+                            claims.Add(new Claim(ClaimTypes.Role, item));
+                            //claims.Add(new Claim("roles",item));
+                        }
+
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_confi["JWT:Key"]));
+                        var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                        var token = new JwtSecurityToken(
+                            _confi["JWT:Issuer"],
+                            _confi["JWT:Audience"],
+                            claims,
+                            expires: DateTime.Now.AddMinutes(5),
+                            signingCredentials: signIn
+                            );
+                        var generateToken = new JwtSecurityTokenHandler().WriteToken(token);
+                        claims.Add(new Claim("Token Security", generateToken.ToString()));
+
+                        return Ok(new { statusCode = 200, message = "Login Success!", data = generateToken });
                 }
             }
             catch (Exception ex)
