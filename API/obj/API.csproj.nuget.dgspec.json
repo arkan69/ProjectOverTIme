@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GitHub\\ProjectOverTIme\\API\\API.csproj": {}
+    "D:\\GitHub\\ProjectOverTime\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\GitHub\\ProjectOverTIme\\API\\API.csproj": {
+    "D:\\GitHub\\ProjectOverTime\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GitHub\\ProjectOverTIme\\API\\API.csproj",
+        "projectUniqueName": "D:\\GitHub\\ProjectOverTime\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\GitHub\\ProjectOverTIme\\API\\API.csproj",
+        "projectPath": "D:\\GitHub\\ProjectOverTime\\API\\API.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\GitHub\\ProjectOverTIme\\API\\obj\\",
+        "outputPath": "D:\\GitHub\\ProjectOverTime\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
