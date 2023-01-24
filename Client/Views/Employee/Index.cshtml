@@ -1,0 +1,106 @@
+﻿@{
+    Layout = "LayoutOvertime";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List Employee</h6>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#insertModal" onclick="InsertEmployee()">INSERT</button>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive tablediv">
+            <table id="table_employee" class="table table-hover table-bordered" width="100%" cellspacing="0">
+                <thead class="thead-light font-weight-bold text-primary">
+                    <tr class="">
+                        <td>No</td>
+                        <td>NIK</td>
+                        <td>Full Name</td>
+                        <td>Phone</td>
+                        <td>Birth Date</td>
+                        <td>Salary</td>
+                        <td>Email</td>
+                        <td>Gender</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade insertModal" id="insertModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Insert Employee</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">NIK:</label>
+                        <input type="text" class="form-control" id="nik" name="nik">
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">First Name:</label>
+                        <input type="text" class="form-control " id="firstName" name="firstName">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Email:</label>
+                        <input type="text" class="form-control" id="email" name="email">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Phone:</label>
+                        <input type="text" class="form-control" id="phone" name="phone">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Birth Date:</label>
+                        <input type="date" class="form-control" id="birthDate" name="birthDate">
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Salary:</label>
+                        <input type="text" class="form-control" id="salary" name="salary">
+                        @*   <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>*@
+                    </div>
+                    <div class="mb-1">
+                        @*<label for="inputGender">Gender</label>
+                        <select id="inputGender" class="form-control" required>
+                        <option value="99" selected>Select Gender</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                        </select>*@
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault1" value=0 required>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Laki - Laki
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gender" id="flexRadioDefault2" value=1 required>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                Perempuan
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" id="btnInsertEmployee" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
