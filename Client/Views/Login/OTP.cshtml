@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "OTP";
+    Layout = "LayoutLogin";
+}
+
+<p class="login-box-msg">A secret code is sent to your email. Please enter it here.</p>
+
+<form action="recover-password.html" method="post">
+    <div class="input-group mb-3">
+        <input type="number" class="form-control" placeholder="Enter OTP">
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Verify OTP</button>
+        </div>
+        <!-- /.col -->
+    </div>
+</form>

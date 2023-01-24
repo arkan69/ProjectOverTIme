@@ -1,6 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Index";
     Layout = "LayoutLogin";
 }
+
+<p class="login-box-msg">Sign in to start your session</p>
+
+<form role="form" method="POST" action="Login/Auth" class="needs-validation" id="formLogin" novalidate>
+    <div class="input-group mb-3">
+        <input type="email" class="form-control" name="Email" placeholder="Email" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+            </div>
+        </div>
+        <div class="invalid-feedback">
+            Please provide a valid email asdsadsadsadsasd.
+        </div>
+    </div>
+    <div class="input-group mb-3">
+        <input type="password" class="form-control" name="Password" placeholder="Password" required>
+        <div class="input-group-append">
+            <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+            </div>
+        </div>
+        <div class="invalid-feedback">
+            Password cannot be empty.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <p class="mb-1">
+                <a asp-area="" asp-controller="Login" asp-action="ForgotPassword">Sign Up</a>
+            </p>
+        </div>
+        <!-- /.col -->
+        <div class="col-4">
+            <button type="submit" id="btn_login" class="btn btn-primary btn-block">Sign In</button>
+        </div>
+        <!-- /.col -->
+    </div>
+</form>
