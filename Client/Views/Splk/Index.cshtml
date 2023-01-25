@@ -85,3 +85,52 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade detailModal" id="detailModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail Form SPLK</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="detailFormSplk">
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">NIK:</label>
+                        <input type="text" class="form-control" id="detailnik" name="detailnik">
+                    </div>
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">Jenis Lembur:</label>
+                        <input type="text" class="form-control" id="detailjenislembur" name="detailjenislembur">
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
+                        <input type="Date" class="form-control" id="detailtglmulai" name="detailtglmulai">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
+                        <input type="time" class="form-control" id="detailjammulai" name="detailjammulai">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
+                        <input type="time" class="form-control" id="detailjamselesai" name="detailjamselesai">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="detaildeskripsi" name="detaildeskripsi" rows="3"></textarea>
+                    </div>
+                    <div class="mb-1" id="imagepreview">
+                        <img id="imgElem"></img>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSaveSplk" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

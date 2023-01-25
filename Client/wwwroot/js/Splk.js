@@ -9,7 +9,7 @@
             {
                 "data": "id",
                 render: function (data, type, row, meta) {
-                    return meta.row + 1;
+                    return meta.row + meta.settings._iDisplayStart + 1;
                 }
             },
             {
@@ -19,9 +19,9 @@
                 "data": null,
                 render: function (data, type, row, meta) {
                     if (row['overtimeType'] == 0) {
-                        return "Weekdays"
+                        return "Kerja"
                     } else {
-                        return "Weekends"
+                        return "Libur"
                     }
                 }
             },
@@ -34,10 +34,20 @@
                 }
             },
             {
-                "data": "endDate"
+                "data": null,
+                render: function (data, type, row, meta) {
+                    var start_time = row['startDate'];
+                    var tmp = Waktu(start_time);
+                    return tmp;
+                }
             },
             {
-                "data": "endDate"
+                "data": null,
+                render: function (data, type, row, meta) {
+                    var end_time = row['endDate'];
+                    var tmp = Waktu(end_time);
+                    return tmp;
+                }
             },
             {
                 "data": "description"
@@ -64,13 +74,13 @@
             {
                 "data": null,
                 "render": function (data, type, row) {
-                    var getNik = row['nik'];
+                    var getNik = row['id'];
                     return `<div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailEmployee('${getNik}')" data-bs-target="#insertModal">
+                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                     &nbsp;
-                                    <button type="button" class="btn btn-sm btn-circle btn-warning" data-bs-toggle="modal" onclick="updateEmployee('${getNik}')" data-bs-target="#insertModal">
+                                    <button type="button" class="btn btn-sm btn-circle btn-warning" data-bs-toggle="modal" onclick="updateSplk('${getNik}')" >
                                         <span class="fas fa-edit"></span>
                                     </button>
                                     &nbsp;
@@ -173,6 +183,61 @@ function Insert() {
             'success'
         )
     })
+}
+
+//UPDATE
+function detailSplk(key) {
+    console.log(key);
+    $.ajax({
+        url: 'https://localhost:7092/api/Splks/' + key
+    }).done((result) => {
+        console.log(result);
+        //$('.createEmployee').modal('show');
+        //$('#exampleModalLabel').html("Detail SPLK");
+        $('#detailnik').prop('readonly', true);
+        $('#detailnik').val(result.data.nik).readonly;
+        if (result.data.overtimeType == 0) {
+            $('#detailjenislembur').val("Kerja");
+        } else {
+            $('#detailjenislembur').val("Libur");
+        }
+
+        startdate_modified = Tanggal(result.data.startDate);
+        $('#detailtglmulai').val(startdate_modified);
+
+        st_modified = Waktu(result.data.startDate);
+        $('#detailjammulai').val(st_modified);
+
+        ed_modified = Waktu(result.data.endDate);
+        $('#detailjamselesai').val(ed_modified);
+        $('#detaildeskripsi').val(result.data.description);
+        //$("#imagepreview").append("<img src='" + result.data.proofOvertime.imageBase64 + "' alt='' class='img-fluid'>");
+        imgElem.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
+        //$('#salary').val(result.data.salary);
+        //$("[name=gender][value=" + result.data.gender + "]").attr('checked', 'checked'); //setvalue
+       
+        //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
+
+    }).fail((error) => {
+        console.log(error);
+        Swal.fire(
+            'Opps!',
+            'Something went wrong!',
+            'error'
+        )
+    });
+}
+
+function Tanggal(tgl) {
+    var tmp = new Date(tgl);
+    var startdate_modified = tmp.getFullYear() + '-' + ((tmp.getMonth() > 8) ? (tmp.getMonth() + 1) : ('0' + (tmp.getMonth() + 1))) + '-' + ((tmp.getDate() > 9) ? tmp.getDate() : ('0' + tmp.getDate()));
+    return startdate_modified;
+}
+
+function Waktu(waktu) {
+    var time = new Date(waktu);
+    var time_modified = ((time.getHours() < 10) ? ('0' + time.getHours()) : (time.getHours())) + ":" + ((time.getMinutes() < 10) ? ('0' + time.getMinutes()) : (time.getMinutes()));
+    return time_modified;
 }
 
 
