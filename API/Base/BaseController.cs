@@ -64,9 +64,9 @@ namespace API.Base
                     ? Ok(new { statusCode = 200, messgae = "Data Failed to Save" })
                     : Ok(new { statusCode = 200, messgae = "Data Has Been Saved", data = result });
             }
-            catch
+            catch (Exception e)
             {
-                return BadRequest(new { statusCode = 500, message = "Input Valid Property" });
+                return BadRequest(new { statusCode = 500, message = "Input Valid Property" + e });
             }
 
         }

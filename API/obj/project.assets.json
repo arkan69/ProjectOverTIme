@@ -4083,19 +4083,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ACER\\.nuget\\packages\\": {}
+    "C:\\Users\\Theo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ARKA\\MCC (KERJAAN)\\Overtime\\ProjectOverTIme\\API\\API.csproj",
+      "projectUniqueName": "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\ARKA\\MCC (KERJAAN)\\Overtime\\ProjectOverTIme\\API\\API.csproj",
-      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\ARKA\\MCC (KERJAAN)\\Overtime\\ProjectOverTIme\\API\\obj\\",
+      "projectPath": "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\API.csproj",
+      "packagesPath": "C:\\Users\\Theo\\.nuget\\packages\\",
+      "outputPath": "D:\\_Koding\\Visual Studio 2022 Community\\CLONE\\3_final_project\\ProjectOverTIme\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Theo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
