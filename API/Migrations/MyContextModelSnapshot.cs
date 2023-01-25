@@ -42,7 +42,7 @@ namespace API.Migrations
 
                     b.HasAlternateKey("Email");
 
-                    b.ToTable("tb_m_accounts");
+                    b.ToTable("tb_m_accounts", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.AccountRole", b =>
@@ -69,7 +69,7 @@ namespace API.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("tb_r_accounts_roles");
+                    b.ToTable("tb_r_accounts_roles", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Department", b =>
@@ -95,7 +95,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_m_departments");
+                    b.ToTable("tb_m_departments", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Employee", b =>
@@ -150,7 +150,7 @@ namespace API.Migrations
 
                     b.HasIndex("ManagerId");
 
-                    b.ToTable("tb_m_employees");
+                    b.ToTable("tb_m_employees", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Role", b =>
@@ -170,7 +170,7 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_m_roles");
+                    b.ToTable("tb_m_roles", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.SPLK", b =>
@@ -229,7 +229,7 @@ namespace API.Migrations
 
                     b.HasIndex("NIK");
 
-                    b.ToTable("tb_m_splk");
+                    b.ToTable("tb_m_splk", (string)null);
                 });
 
             modelBuilder.Entity("API.Models.Account", b =>

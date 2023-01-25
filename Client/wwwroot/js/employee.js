@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     table = $("#table_employee").DataTable({
         ajax: {
-            "url": "../employee/GetALL",
+            "url": "../employee/GetAll",
             "dataType": "Json",
             "dataSrc": ""
         },
@@ -16,13 +16,38 @@
                 "data": "nik"
             },
             {
-                "data": "phone"
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return row['firstName'] + " " + row['lastName']
+                }
             },
             {
-                "data": "birthDate"
+                "data": null,
+                render: function (data, type, row, meta) {
+                    var phones = row['phone'];
+                    var tmp = "";
+                    if (phones.substring(0, 1) == "0") {
+                        tmp = phones.replace(phones.substring(0, 1), "+62");
+                    } else {
+                        tmp = phones;
+                    }
+                    return tmp;
+                }
             },
             {
-                "data": "salary"
+                "data": null,
+                render: function (data, type, row, meta) {
+                    var birthdate = row['birthDate'];
+                    var tmp = new Date(birthdate);
+
+                    return ((tmp.getMonth() > 8) ? (tmp.getMonth() + 1) : ('0' + (tmp.getMonth() + 1))) + '/' + ((tmp.getDate() > 9) ? tmp.getDate() : ('0' + tmp.getDate())) + '/' + tmp.getFullYear();
+                }
+            },
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return formatRupiah(row['salary']);
+                }
             },
             {
                 "data": null,
@@ -145,4 +170,11 @@ function Insert() {
     })
 }
 
+// formatRupiah
+function formatRupiah(angka) {
+    const format = angka.toString().split('').reverse().join('');
+    const convert = format.match(/\d{1,3}/g);
+    const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
+    return rupiah;
+}
 
