@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace API.Models
 {
@@ -11,5 +12,9 @@ namespace API.Models
 
         [Required, Column("name"), MaxLength(50)]
         public string Name { get; set; }
+
+        // Relation
+        [JsonIgnore]
+        public ICollection<AccountRole>? AccountRoles { get; set; }
     }
 }

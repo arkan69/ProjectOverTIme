@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "LayoutOvertime";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary"> Surat Pengajuan Lembur Kerja Approved by Manager</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive tablediv">
+            <table id="table_finance" class="table table-hover table-bordered" width="100%" cellspacing="0">
+                <thead class="thead-light font-weight-bold text-primary">
+                    <tr class="">
+                        <td>No</td>
+                        <td>NIK</td>
+                        <td>Jenis Lembur</td>
+                        <td>Tanggal Mulai</td>
+                        <td>Jam Mulai</td>
+                        <td>Jam Mulai</td>
+                        <td>Description</td>
+                        <td>Status</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade detailModal" id="detailModalManager" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Detail SPLK Approved Manager</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="detailFormFinance">
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">NIK:</label>
+                        <input type="text" class="form-control" id="detailFnik" name="detailFnik">
+                    </div>
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">Jenis Lembur:</label>
+                        <input type="text" class="form-control" id="detailFjenislembur" name="detailFjenislembur">
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
+                        <input type="Date" class="form-control" id="detailFtglmulai" name="detailFtglmulai">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
+                        <input type="time" class="form-control" id="detailFjammulai" name="detailFjammulai">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
+                        <input type="time" class="form-control" id="detailFjamselesai" name="detailFjamselesai">
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="detailFdeskripsi" name="detailFdeskripsi" rows="3"></textarea>
+                    </div>
+                    <div class="mb-1">
+                        <img id="imgElemF"></img>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="btnApproveFinance" class="btn btn-primary">Approve</button>
+                        <button type="submit" id="btnRejectFinance" class="btn btn-primary">Reject</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

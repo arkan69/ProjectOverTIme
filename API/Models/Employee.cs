@@ -13,6 +13,7 @@ namespace API.Models
 
         [Required, Column("first_name"), MaxLength(25)]
         public string FirstName { get; set; }
+
         [Column("last_name"), MaxLength(25)]
         public string LastName { get; set; }
 
@@ -27,12 +28,29 @@ namespace API.Models
 
         [Required, Column("gender")]
         public Gender Gender { get; set; }
+
+        [Column("manager_id")]
+        public string? ManagerId { get; set; }
+
+        [Column("department_id")]
         public int DepartmentId { get; set; }
-        public int SplkId { get; set; }
 
         // Relation
-        //[JsonIgnore]
-        //public Account? Account { get; set; }
+        [JsonIgnore]
+        public Account? Account { get; set; }
+
+        [ForeignKey("DepartmentId")]
+        [JsonIgnore]
+        public Department? Department { get; set; }
+
+        [JsonIgnore]
+        public ICollection<SPLK>? Splks { get; set; }
+
+        [ForeignKey("ManagerId")]
+        [JsonIgnore]
+        public virtual Employee? Manager { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Employee>? Employees { get; set; }
     }
 
     public enum Gender
