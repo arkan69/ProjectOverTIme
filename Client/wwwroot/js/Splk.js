@@ -130,7 +130,7 @@ $("#btnSaveSplk").click(function (e) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
             console.log("INI INSERT");
-            InsertSplk();
+            InsertSplkForm();
         } 
     //}
 });
@@ -151,16 +151,20 @@ function InsertSplk() {
 };
 
 //INSERT NEW 1
-function InsertSplk() {
-
+function InsertSplkForm() {
+    let start = new Date("2022-01-01T09:00:00"); // jam mulai
+    let end = new Date("2022-01-01T10:00:00"); // jam selesai
+    let duration = end.getTime() - start.getTime(); // selisih waktu dalam milidetik
+    let durationMinutes = duration / (1000 * 60);
+    console.log("Cobaa time", durationMinutes);
     var fd = new FormData();
     fd.append('nik', $("#nik").val())
     fd.append('overtimeType', $('#jenislembur').val());
-    //var dateObj = new Date($("#tglmulai").val() + ' ' + $("#jammulai").val());
-    fd.append('startDate', new Date($("#tglmulai").val() + ' ' + $("#jammulai").val()));
-    fd.append('endDate', new Date($("#tglmulai").val() + ' ' + $("#jamselesai").val()));
+    fd.append('StartDate',($("#tglmulai").val() + 'T' + $("#jammulai").val()));
+    fd.append('EndDate', ($("#tglmulai").val() + 'T' + $("#jamselesai").val()));
     fd.append('description', $("#deskripsi").val());
     fd.append('file', $('#buktifile')[0].files[0]);
+
     //var momentObj = moment($("#tglmulai").val() + $("#jammulai").val(), 'YYYY-MM-DDLT');
     //// conversion
     //var dateTime = momentObj.format('YYYY-MM-DDTHH:mm:s');

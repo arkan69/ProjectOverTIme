@@ -7,11 +7,11 @@ namespace Client.Models
     {
         public int Id { get; set; }
         public string NIK { get; set; }
-        //public OvertimeType OvertimeType { get; set; }
-        //public DateTime StartDate { get; set; }
-        //public DateTime EndDate { get; set; }
-        //public string Description { get; set; }
-        //public Status Status { get; set; }
+        public OvertimeType OvertimeType { get; set; }
+        public String StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Description { get; set; }
+        public Status Status { get; set; }
         public IFormFile File { get; set; }
         public List<IFormFile> Files { get; set; }
         //public int JmlJam { get; set; }

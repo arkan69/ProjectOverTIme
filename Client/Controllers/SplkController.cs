@@ -48,21 +48,21 @@ namespace Client.Controllers
                     var file = new SPLK()
                     {
                         NIK = entity.NIK,
-                        OvertimeType = 0,
-                        StartDate = DateTime.Now,
-                        EndDate = DateTime.Now,
-                        Description = "Cobacoba",
-                        Status = 0,
-                        JmlJam = 1,
-                        UpahLembur = 1000,
+                        OvertimeType = entity.OvertimeType,
+                        StartDate = DateTime.Parse(entity.StartDate),
+                        EndDate = DateTime.Parse(entity.EndDate),
+                        Description = entity.Description,
+                        Status = entity.Status,
+                        JmlJam = 0,
+                        UpahLembur = 0,
                         TglSelesai = DateTime.Now,
                         ProofOvertime = memoryStream.ToArray()
                     };
                     Console.WriteLine(file);
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(file), Encoding.UTF8, "application/json");
-                    var result = httpClient.PostAsync(address.link + "Splks", content).Result;
+                    //StringContent content = new StringContent(JsonConvert.SerializeObject(file), Encoding.UTF8, "application/json");
+                    //var result = httpClient.PostAsync(address.link + "Splks", content).Result;
                     //var result = repository.Splk(file);
-                    return Json(result);
+                    //return Json(result);
 
                 }
             }
