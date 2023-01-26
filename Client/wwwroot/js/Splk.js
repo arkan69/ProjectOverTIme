@@ -84,7 +84,7 @@
                                         <span class="fas fa-edit"></span>
                                     </button>
                                     &nbsp;
-                                    <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="Delete('${getNik}')" ">
+                                    <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="DeleteSpkl('${getNik}')" ">
                                         <span class="fas fa-trash"></span>
                                     </button>
                                 </div>
@@ -101,21 +101,21 @@
                 extend: 'excelHtml5',
                 className: 'btn btn-success mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'csvHtml5',
                 className: 'btn btn-warning mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 className: 'btn btn-info mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             }
         ]
@@ -127,21 +127,22 @@
 $("#btnSaveSplk").click(function (e) {
     e.preventDefault();
     //if ($("#form").valid()) {
-        var data_action = $(this).attr("data-name");
-        if (data_action == "insert") {
-            console.log("INI INSERT");
-            Insert();
-        } else if (data_action == "update") {
-            console.log("INI UPDATE");
-            UpdatePostEmployee();
-        }
+    var data_action = $(this).attr("data-name");
+    if (data_action == "insert") {
+        console.log("INI INSERT");
+        Insert();
+    } else if (data_action == "update") {
+        console.log("INI UPDATE");
+        UpdatePostEmployee();
+    }
     //}
 });
 
 // Clear Modal Insert Employee
 function InsertSplk() {
     //$('#labelText').html("Create New Employee");
-    //$('#nik').val("");
+    $('#nik').val("");
+    $('#buktifile').val("");
     //$('#nik').removeAttr('readonly');
     //$('#firstName').val("");
     //$('#lastName').val("");
@@ -182,6 +183,8 @@ function Insert() {
             "Data Berhasil ditambahkan",
             'success'
         )
+        $('#insertModal').modal('hide')
+        $('#table_splk').DataTable().ajax.reload()
     })
 }
 
@@ -289,4 +292,37 @@ function Waktu(waktu) {
     return time_modified;
 }
 
-
+//Detele data
+const DeleteSpkl = (key) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'DELETE',
+                url: `https://localhost:7092/api/Splks/${key}`,
+                success: () => {
+                    Swal.fire(
+                        'Deleted',
+                        'Employee has been deleted.',
+                        'success'
+                    )
+                    $('#table_splk').DataTable().ajax.reload()
+                },
+                error: () => {
+                    Swal.fire(
+                        'Failed',
+                        'Error deleting employee',
+                        'error'
+                    )
+                }
+            })
+        }
+    })
+}

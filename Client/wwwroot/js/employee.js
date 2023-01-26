@@ -109,12 +109,12 @@
 
 
 // Action Function Insert & Update
-$("#btnSaveSplk").click(function (e) {
+$("#btnSaveEmployee").click(function (e) {
     e.preventDefault();
     //if ($("#form").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
-            console.log("INI INSERT");
+            console.log("INI INSERT BLABLA");
             Insert();
         } else if (data_action == "update") {
             console.log("INI UPDATE");
@@ -124,7 +124,7 @@ $("#btnSaveSplk").click(function (e) {
 });
 
 // Clear Modal Insert Employee
-function InsertSplk() {
+function InsertEmployee() {
     //$('#labelText').html("Create New Employee");
     //$('#nik').val("");
     //$('#nik').removeAttr('readonly');
@@ -135,7 +135,7 @@ function InsertSplk() {
     //$('#salary').val("");
     //$("[name=gender]").attr('checked', false);
     //$('#birthDate').val("");
-    $('#btnSaveSplk').attr('data-name', 'insert').html("<span class='fas fa-save'>&nbsp;</span>Save");
+    $('#btnSaveEmployee').attr('data-name', 'insert').html("<span class='fas fa-save'>&nbsp;</span>Save");
 };
 
 //INSERT NEW 1
@@ -143,7 +143,7 @@ function Insert() {
 
     var fd = new FormData();
     fd.append('nik', $("#nik").val())
-    fd.append('file', $('#buktifile')[0].files[0]);
+    //fd.append('file', $('#buktifile')[0].files[0]);
 
     //var obj = new FormData();
     //obj.NIK = $("#nik").val();
@@ -178,3 +178,37 @@ function formatRupiah(angka) {
     return rupiah;
 }
 
+//Detele data
+const Delete = (key) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'DELETE',
+                url: `https://localhost:7092/api/Employees/${key}`,
+                success: () => {
+                    Swal.fire(
+                        'Deleted',
+                        'Employee has been deleted.',
+                        'success'
+                    )
+                    $('#table_employee').DataTable().ajax.reload()
+                },
+                error: () => {
+                    Swal.fire(
+                        'Failed',
+                        'Error deleting employee',
+                        'error'
+                    )
+                }
+            })
+        }
+    })
+}
