@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     table = $("#table_splk").DataTable({
         ajax: {
-            "url": "https://localhost:7092/api/Splks/",
+            "url": "../Employee/GetMasterEmployee",
             "dataType": "Json",
             "dataSrc": ""
         },
@@ -79,14 +79,6 @@
                                     <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
-                                    &nbsp;
-                                    <button type="button" class="btn btn-sm btn-circle btn-warning" data-bs-toggle="modal" onclick="updateSplk('${getNik}')" >
-                                        <span class="fas fa-edit"></span>
-                                    </button>
-                                    &nbsp;
-                                    <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="Delete('${getNik}')" ">
-                                        <span class="fas fa-trash"></span>
-                                    </button>
                                 </div>
                             `;
                 },
@@ -122,17 +114,75 @@
     });
 });
 
+//Validate Jquery Plugin
+//Ver 0
+$(document).ready(function () {
+    $('#formSplk').validate({
+        ignore: ":hidden",
+        rules: {
+            jenislembur: {
+                required: true
+            },
+            tglmulai: {
+                required: true
+            },
+            jammulai: {
+                required: true
+            },
+            jamselesai: {
+                required: true
+            },
+            deskripsi: {
+                required: true
+            },
+            buktifile: {
+                required: true
+            }
+        },
+
+        messages: {
+            jenislembur: {
+                required: "<div style='font-size:15px; '>Jenis Lembur is required.</div>"
+            },
+            tglmulai: {
+                required: "<div style='font-size:15px; '>Tanggal is required.</div>"
+            },
+            jammulai: {
+                required: "<div style='font-size:15px; '>Jam Mulai is required.</div>"
+            },
+            jamselesai: {
+                required: "<div style='font-size:15px; '>Jam Selesai is required.</div>"
+            },
+            deskripsi: {
+                required: "<div style='font-size:15px; '>Deskripsi is required.</div>"
+            },
+            buktifile: {
+                required: "<p style='font-size:15px; width:100%'>Bukti File is required.</p>"
+            }
+        },
+        highlight: function (element) {
+            $(element).addClass("is-invalid").removeClass("is-valid");
+        },
+        unhighlight: function (element) {
+            $(element).addClass("is-valid").removeClass("is-invalid");
+        },
+
+        errorPlacement: function (error, element) {
+            error.insertAfter(element);
+        }
+    });
+});
 
 // Action Function Insert & Update
 $("#btnSaveSplk").click(function (e) {
     e.preventDefault();
-    //if ($("#form").valid()) {
+    if ($("#formSplk").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
             console.log("INI INSERT");
             InsertSplkForm();
         } 
-    //}
+    }
 });
 
 // Clear Modal Insert Employee
@@ -152,47 +202,40 @@ function InsertSplk() {
 
 //INSERT NEW 1
 function InsertSplkForm() {
-    let start = new Date("2022-01-01T09:00:00"); // jam mulai
-    let end = new Date("2022-01-01T10:00:00"); // jam selesai
-    let duration = end.getTime() - start.getTime(); // selisih waktu dalam milidetik
+    let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
+    let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
+
+    //Hitung selisih Jam
+    let duration = (new Date(End)).getTime() - (new Date(Start)).getTime(); 
     let durationMinutes = duration / (1000 * 60);
-    console.log("Cobaa time", durationMinutes);
+    let hours = Math.floor(durationMinutes / 60);
+
     var fd = new FormData();
     fd.append('nik', $("#nik").val())
     fd.append('overtimeType', $('#jenislembur').val());
-    fd.append('StartDate',($("#tglmulai").val() + 'T' + $("#jammulai").val()));
-    fd.append('EndDate', ($("#tglmulai").val() + 'T' + $("#jamselesai").val()));
+    fd.append('StartDate',Start);
+    fd.append('EndDate', End);
     fd.append('description', $("#deskripsi").val());
+    fd.append('JmlJam', hours);
     fd.append('file', $('#buktifile')[0].files[0]);
 
-    //var momentObj = moment($("#tglmulai").val() + $("#jammulai").val(), 'YYYY-MM-DDLT');
-    //// conversion
-    //var dateTime = momentObj.format('YYYY-MM-DDTHH:mm:s');
-
-    //console.log(dateObj);
-    //var obj = new FormData();
-    //obj.NIK = $("#nik").val();
-    //obj.OvertimeType = $("#jenislembur").val();
-    //obj.StartDate = $("#tglmulai").val();
-    //obj.EndDate = $("#tglmulai").val();
-    //obj.Description = $("#deskripsi").val();
-    //obj.file = $('#buktifile')[0].files[0];
     console.log(fd);
 
-    //$.ajax({
-    //    url: "../Splk/SplkForm",
-    //    type: "POST",
-    //    data: fd,
-    //    processData: false,
-    //    contentType: false,
-    //}).done((result) => {
-    //    console.log(result);
-    //    Swal.fire(
-    //        'Success',
-    //        "Data Berhasil ditambahkan",
-    //        'success'
-    //    )
-    //})
+    $.ajax({
+        url: "../Splk/SplkForm",
+        type: "POST",
+        data: fd,
+        processData: false,
+        contentType: false,
+    }).done((result) => {
+        Swal.fire(
+            'Success',
+            "Data Berhasil ditambahkan",
+            'success'
+        )
+        table.ajax.reload();
+        $('.insertModal').modal('hide');
+    })
 }
 
 //UPDATE
@@ -205,7 +248,7 @@ function detailSplk(key) {
         //$('.createEmployee').modal('show');
         //$('#exampleModalLabel').html("Detail SPLK");
         $('#detailnik').prop('readonly', true);
-        $('#detailnik').val(result.data.nik).readonly;
+        $('#detailik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
             $('#detailjenislembur').val("Kerja");
         } else {
@@ -216,16 +259,13 @@ function detailSplk(key) {
         $('#detailtglmulai').val(startdate_modified);
 
         st_modified = Waktu(result.data.startDate);
-        $('#detailjammulai').val(st_modified);
+        $('#detailMjammulai').val(st_modified);
 
         ed_modified = Waktu(result.data.endDate);
         $('#detailjamselesai').val(ed_modified);
         $('#detaildeskripsi').val(result.data.description);
-        //$("#imagepreview").append("<img src='" + result.data.proofOvertime.imageBase64 + "' alt='' class='img-fluid'>");
         imgElem.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
-        //$('#salary').val(result.data.salary);
-        //$("[name=gender][value=" + result.data.gender + "]").attr('checked', 'checked'); //setvalue
-       
+
         //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
     }).fail((error) => {

@@ -33,6 +33,32 @@ namespace Client.Repositories.Data
             
         }
 
+        public async Task<List<SPLK>> GetMasterEmployee(string email)
+        {
+            List<SPLK> entities = new List<SPLK>();
+
+            using (var response = await httpClient.GetAsync(address.link + request + "Master?email=" + email))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<SPLK>>(apiResponse);
+            }
+
+            return entities;
+        }
+
+        public async Task<List<SPLK>> SplkEmployee(string email)
+        {
+            List<SPLK> entities = new List<SPLK>();
+
+            using (var response = await httpClient.GetAsync(address.link + request + "Manager?email=" + email))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<SPLK>>(apiResponse);
+            }
+
+            return entities;
+        }
+
         //public HttpStatusCode Register(RegisterVM entity)
         //{
         //    StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");

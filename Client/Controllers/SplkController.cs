@@ -53,16 +53,16 @@ namespace Client.Controllers
                         EndDate = DateTime.Parse(entity.EndDate),
                         Description = entity.Description,
                         Status = entity.Status,
-                        JmlJam = 0,
+                        JmlJam = entity.JmlJam,
                         UpahLembur = 0,
                         TglSelesai = DateTime.Now,
                         ProofOvertime = memoryStream.ToArray()
                     };
                     Console.WriteLine(file);
-                    //StringContent content = new StringContent(JsonConvert.SerializeObject(file), Encoding.UTF8, "application/json");
-                    //var result = httpClient.PostAsync(address.link + "Splks", content).Result;
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(file), Encoding.UTF8, "application/json");
+                    var result = httpClient.PostAsync(address.link + "Splks", content).Result;
                     //var result = repository.Splk(file);
-                    //return Json(result);
+                    return Json(result);
 
                 }
             }

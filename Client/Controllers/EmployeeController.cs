@@ -2,6 +2,7 @@
 using Client.Base;
 using Client.Repositories.Data;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Client.Controllers
 {
@@ -15,6 +16,22 @@ namespace Client.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetMasterEmployee()
+        {
+            var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = await repository.GetMasterEmployee(email);
+            return Json(result);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> SplkEmployee()
+        {
+            var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = await repository.SplkEmployee(email);
+            return Json(result);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     table = $("#table_manager").DataTable({
         ajax: {
-            "url": "https://localhost:7092/api/Splks/",
+            "url": "../Employee/SplkEmployee",
             "dataType": "Json",
             "dataSrc": ""
         },
@@ -141,12 +141,9 @@ function detailmanager(key) {
 
         ed_modified = Waktu(result.data.endDate);
         $('#detailMjamselesai').val(ed_modified);
-        $('#detail,deskripsi').val(result.data.description);
-        //$("#imagepreview").append("<img src='" + result.data.proofOvertime.imageBase64 + "' alt='' class='img-fluid'>");
+        $('#detailMdeskripsi').val(result.data.description);
         imgElemM.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
-        //$('#salary').val(result.data.salary);
-        //$("[name=gender][value=" + result.data.gender + "]").attr('checked', 'checked'); //setvalue
-
+       
         //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
     }).fail((error) => {
@@ -158,3 +155,84 @@ function detailmanager(key) {
         )
     });
 }
+
+// Action Function Approved
+$("#btnApprovedManager").click(function (e) {
+    Swal.fire({
+        title: 'Yakin ingin diApproved?',
+        text: "Surat Pengajuan akan di Setujui.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya Approved!',
+        cancelButtonText: 'Batal Approved'
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Object
+            $.ajax({
+               // url: 'https://localhost:7234/api/Employees/' + key,
+               // type: "DELETE",
+
+            }).done((result) => {
+                Swal.fire(
+                    'Approved',
+                    'SPLK Employee Berhasil diApproved',
+                    'success'
+                )
+                table.ajax.reload();
+                $('.detailModal').modal('hide');
+
+            }).fail((error) => {
+                console.log(error);
+                Swal.fire(
+                    'Opps!',
+                    'Something went wrong!',
+                    'error'
+                )
+            })
+        }
+    })   
+});
+
+// Action Function Rejected
+$("#btnRejectedManager").click(function (e) {
+    e.preventDefault();
+    Swal.fire({
+        title: 'Yakin ingin diRejected?',
+        text: "Surat Pengajuan akan di Rejected.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya Rejected!',
+        cancelButtonText: 'Batal Rejected'
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Object
+            $.ajax({
+                // url: 'https://localhost:7234/api/Employees/' + key,
+                // type: "DELETE",
+
+            }).done((result) => {
+                Swal.fire(
+                    'Approved',
+                    'SPLK Employee Berhasil diRejected',
+                    'success'
+                )
+                table.ajax.reload();
+                $('.detailModal').modal('hide');
+
+            }).fail((error) => {
+                console.log(error);
+                Swal.fire(
+                    'Opps!',
+                    'Something went wrong!',
+                    'error'
+                )
+            })
+        }
+    })
+});

@@ -14,7 +14,7 @@ namespace Client.Models
         public Status Status { get; set; }
         public IFormFile File { get; set; }
         public List<IFormFile> Files { get; set; }
-        //public int JmlJam { get; set; }
+        public int JmlJam { get; set; }
         //public double UpahLembur { get; set; }
         //public DateTime TglSelesai { get; set; }
     }
