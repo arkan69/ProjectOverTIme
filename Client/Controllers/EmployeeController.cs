@@ -1,6 +1,5 @@
 ﻿using API.Models;
 using Client.Base;
-using Client.Models;
 using Client.Repositories.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -9,8 +8,6 @@ namespace Client.Controllers
 {
     public class EmployeeController : BaseController<Employee, EmployeeRepository, string>
     {
-        private readonly Address address;
-        private readonly HttpClient httpClient;
         private readonly EmployeeRepository repository;
         public EmployeeController(EmployeeRepository repository) : base(repository)
         {
@@ -31,15 +28,10 @@ namespace Client.Controllers
 
         [HttpGet]
         public async Task<JsonResult> SplkEmployee()
-                {
+        {
             var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
             var result = await repository.SplkEmployee(email);
-                    return Json(result);
-
-                }
-            }
-
-            return Json("{}");
+            return Json(result);
         }
     }
 }

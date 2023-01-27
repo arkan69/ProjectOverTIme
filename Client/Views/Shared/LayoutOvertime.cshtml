@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <!-- Custom fonts for this template-->
@@ -82,9 +81,11 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" asp-controller="LandingPage" asp-action="Index">Landing Page</a>
-                        <a class="collapse-item" asp-controller="Employee" asp-action="Index">Employee</a>
-                        <a class="collapse-item" asp-controller="Splk" asp-action="Index">SPLK Form</a>
-                        <a class="collapse-item" asp-controller="Chart" asp-action="Index">Chart Employee</a>
+                        <a class="collapse-item" asp-controller="Employee" asp-action="Index">Employee for Admin</a>
+                        <a class="collapse-item" asp-controller="Splk" asp-action="Index">SPLK Form for Employee</a>
+                        <a class="collapse-item" asp-controller="Manager" asp-action="Index">SPLK Employee for Manager</a>
+                        <a class="collapse-item" asp-controller="Finance" asp-action="Index">SPLK Approved for Finance</a>
+                        <a class="collapse-item" asp-controller="Chart" asp-action="Index">Chart Employee for Manager or Employee ?</a>
                         <a class="collapse-item" asp-controller="Login" asp-action="Index">Login</a>
                     </div>
                 </div>
@@ -210,7 +211,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2023</span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>

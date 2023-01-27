@@ -27,7 +27,7 @@ namespace Client.Controllers
             };
         }
         //[Authorize(Roles = "Employee")]
-        public IActionResult Index()
+        public IActionResult Index() 
         {
             var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
             

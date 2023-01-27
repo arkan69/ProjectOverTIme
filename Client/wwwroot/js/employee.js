@@ -178,37 +178,3 @@ function formatRupiah(angka) {
     return rupiah;
 }
 
-//Detele data
-const Delete = (key) => {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: 'You want able to revert this!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: 'DELETE',
-                url: `https://localhost:7092/api/Employees/${key}`,
-                success: () => {
-                    Swal.fire(
-                        'Deleted',
-                        'Employee has been deleted.',
-                        'success'
-                    )
-                    $('#table_employee').DataTable().ajax.reload()
-                },
-                error: () => {
-                    Swal.fire(
-                        'Failed',
-                        'Error deleting employee',
-                        'error'
-                    )
-                }
-            })
-        }
-    })
-}
