@@ -79,6 +79,14 @@
                                     <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-sm btn-circle btn-warning" data-bs-toggle="modal" onclick="updateSplk('${getNik}')" data-bs-target="#updateModal">
+                                        <span class="fas fa-edit"></span>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="DeleteSpkl('${getNik}')" ">
+                                        <span class="fas fa-trash"></span>
+                                    </button>
                                 </div>
                             `;
                 },
@@ -177,11 +185,11 @@ $(document).ready(function () {
 $("#btnSaveSplk").click(function (e) {
     e.preventDefault();
     if ($("#formSplk").valid()) {
-        var data_action = $(this).attr("data-name");
-        if (data_action == "insert") {
-            console.log("INI INSERT");
+    var data_action = $(this).attr("data-name");
+    if (data_action == "insert") {
+        console.log("INI INSERT");
             InsertSplkForm();
-        } 
+    }
     }
 });
 
@@ -189,6 +197,7 @@ $("#btnSaveSplk").click(function (e) {
 function InsertSplk() {
     //$('#labelText').html("Create New Employee");
     $('#nik').val("");
+    $('#buktifile').val("");
     //$('#nik').removeAttr('readonly');
     //$('#firstName').val("");
     //$('#lastName').val("");
@@ -228,6 +237,7 @@ function InsertSplkForm() {
         processData: false,
         contentType: false,
     }).done((result) => {
+        console.log(result);
         Swal.fire(
             'Success',
             "Data Berhasil ditambahkan",
@@ -265,6 +275,51 @@ function detailSplk(key) {
         $('#detailjamselesai').val(ed_modified);
         $('#detaildeskripsi').val(result.data.description);
         imgElem.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
+        //$('#salary').val(result.data.salary);
+        //$("[name=gender][value=" + result.data.gender + "]").attr('checked', 'checked'); //setvalue
+       
+        //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
+
+    }).fail((error) => {
+        console.log(error);
+        Swal.fire(
+            'Opps!',
+            'Something went wrong!',
+            'error'
+        )
+    });
+}
+
+//UPDATE
+function updateSplk(key) {
+    console.log(key);
+    $.ajax({
+        url: 'https://localhost:7092/api/Splks/' + key
+    }).done((result) => {
+        console.log(result);
+        //$('.createEmployee').modal('show');
+        //$('#exampleModalLabel').html("Detail SPLK");
+        $('#updatenik').prop('readonly', true);
+        $('#updatenik').val(result.data.nik).readonly;
+        if (result.data.overtimeType == 0) {
+            $('#updatejenislembur').val("Kerja");
+        } else {
+            $('#updatejenislembur').val("Libur");
+        }
+
+        startdate_modified = Tanggal(result.data.startDate);
+        $('#updatetglmulai').val(startdate_modified);
+
+        st_modified = Waktu(result.data.startDate);
+        $('#updatejammulai').val(st_modified);
+
+        ed_modified = Waktu(result.data.endDate);
+        $('#updatejamselesai').val(ed_modified);
+        $('#updatedeskripsi').val(result.data.description);
+        //$("#imagepreview").append("<img src='" + result.data.proofOvertime.imageBase64 + "' alt='' class='img-fluid'>");
+        imgElems.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
+        //$('#salary').val(result.data.salary);
+        //$("[name=gender][value=" + result.data.gender + "]").attr('checked', 'checked'); //setvalue
 
         //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
