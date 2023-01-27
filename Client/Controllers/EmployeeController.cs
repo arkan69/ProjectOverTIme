@@ -12,6 +12,8 @@ namespace Client.Controllers
 {
     public class EmployeeController : BaseController<Employee, EmployeeRepository, string>
     {
+        private readonly Address address;
+        private readonly HttpClient httpClient;
         private readonly EmployeeRepository repository;
         public EmployeeController(EmployeeRepository repository) : base(repository)
         {
@@ -23,7 +25,7 @@ namespace Client.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EmployeeForm(SplkViewModel entity)
+        public async Task<IActionResult> SplkForm(SplkViewModel entity)
         {
             using (var memoryStream = new MemoryStream())
             {
