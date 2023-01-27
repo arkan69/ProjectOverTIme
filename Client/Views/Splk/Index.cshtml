@@ -53,20 +53,25 @@
                         <option value="1">Libur</option>
                         </select>
                     </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
-                        <input type="Date" class="form-control" id="tglmulai" name="tglmulai">
-                    </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
-                        <input type="time" class="form-control" id="jammulai" name="jammulai">
 
-                    </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
-                        <input type="time" class="form-control" id="jamselesai" name="jamselesai">
+                    <div class="row g-3 mb-1">
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
+                            <input type="Date" class="form-control" id="tglmulai" name="tglmulai">
 
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
+                            <input type="time" class="form-control" id="jammulai" name="jammulai">
+
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
+                            <input type="time" class="form-control" id="jamselesai" name="jamselesai">
+
+                        </div>
                     </div>
+
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label">Description:</label>
                         <textarea class="form-control" id="deskripsi" name="deskripsi" rows="3"></textarea>
@@ -102,31 +107,94 @@
                         <label for="nik" class="col-form-label">Jenis Lembur:</label>
                         <input type="text" class="form-control" id="detailjenislembur" name="detailjenislembur">
                     </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
-                        <input type="Date" class="form-control" id="detailtglmulai" name="detailtglmulai">
+
+
+                    <div class="row g-3 mb-1">
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
+                            <input type="Date" class="form-control" id="detailtglmulai" name="detailtglmulai">
+
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
+                            <input type="time" class="form-control" id="detailjammulai" name="detailjammulai">
+
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
+                            <input type="time" class="form-control" id="detailjamselesai" name="detailjamselesai">
+
+                        </div>
 
                     </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
-                        <input type="time" class="form-control" id="detailjammulai" name="detailjammulai">
 
-                    </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
-                        <input type="time" class="form-control" id="detailjamselesai" name="detailjamselesai">
-
-                    </div>
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label">Description:</label>
                         <textarea class="form-control" id="detaildeskripsi" name="detaildeskripsi" rows="3"></textarea>
                     </div>
                     <div class="mb-1" id="imagepreview">
-                        <img id="imgElem"></img>
+                        <label for="recipient-name" class="col-form-label">Bukti Lembur:</label>
+                        <br />
+                        <img class="mb-2" id="imgElem" style="height: 40%; width: 40%; border-style: solid; border-width: 1px; border-color: lightgray;"></img>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="" class="btn btn-primary" >Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade updateModal" id="updateModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Form SPLK</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="updateFormSplk">
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">NIK:</label>
+                        <input type="text" class="form-control" id="updatenik" name="updatenik">
+                    </div>
+                    <div class="mb-1">
+                        <label for="nik" class="col-form-label">Jenis Lembur:</label>
+                        <input type="text" class="form-control" id="updatejenislembur" name="updatejenislembur">
+                    </div>
+                    <div class="row g-3 mb-1">
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
+                            <input type="Date" class="form-control" id="updatetglmulai" name="updatetglmulai">
+
+                        </div>
+
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
+                            <input type="time" class="form-control" id="updatejammulai" name="updatejammulai">
+
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
+                            <input type="time" class="form-control" id="updatejamselesai" name="updatejamselesai">
+
+                        </div>
+
+                    </div>
+                    <div class="mb-1">
+                        <label for="recipient-name" class="col-form-label">Description:</label>
+                        <textarea class="form-control" id="updatedeskripsi" name="updatedeskripsi" rows="3"></textarea>
+                    </div>
+                    <div class="mb-1" id="imagepreview">
+                        <label for="recipient-name" class="col-form-label">Bukti Lembur:</label>
+                        <br />
+                        <img class="mb-2" id="imgElems" style="height: 40%; width: 40%; border-style: solid; border-width: 1px; border-color: lightgray;"></img>
+                        <input type="file" class="form-control" id="buktifile" name="buktifile">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSaveSplk" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
