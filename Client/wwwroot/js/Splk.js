@@ -175,7 +175,7 @@ $(document).ready(function () {
 
 // Action Function Insert & Update
 $("#btnSaveSplk").click(function (e) {
-    e.preventDefault();
+    //e.preventDefault();
     //if ($("#formSplk").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
@@ -223,6 +223,7 @@ console.log("data baru", data);
 function InsertSplkForm() {
     let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
     let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
+    let today = new Date();
 
     //Hitung selisih Jam
     let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
@@ -238,7 +239,7 @@ function InsertSplkForm() {
     fd.append('JmlJam', hours);
     fd.append('file', $('#buktifile')[0].files[0]);
 
-    if (Start.getTime() > today.getTime()) {
+    if ((new Date(Start)).getTime() > today.getTime()) {
         alert("Tanggal tidak boleh melebihi hari ini!");
     }
     else if (hours < 1 || hours > 4) {
