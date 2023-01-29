@@ -13,7 +13,11 @@ namespace API.Repositories.Data
         {
             _context = context;
         }
-
+        public IEnumerable<SPLK> GetFinance()
+        {
+            var result = _context.Splk.Where(x => x.Status == Status.Approved || x.Status == Status.Done).ToList();
+            return result;
+        }
         public IEnumerable MasterEmployee(string email)
         {
             return _context.Accounts
@@ -23,7 +27,7 @@ namespace API.Repositories.Data
                 (ae, s) => new
                 {
                     //ManagerId = ae.e.ManagerId,
-                    
+
                     //FullName = (ae.e.FirstName + " " + ae.e.LastName),
                     Id = s.Id,
                     nik = s.NIK,
@@ -64,11 +68,57 @@ namespace API.Repositories.Data
         public int UpdateForm(SplkUpdateVM update)
         {
             var record = _context.Splk.Find(update.Id);
+            var record1 = _context.Employees.Find(update.NIK);
             record.Status = update.Status;
-            record.UpahLembur = 3 * 2000;
-            _context.SaveChanges();
+
+            if (update.Status.ToString() == "Refuse")
+            {
+                _context.SaveChanges();
+                return 1;
+            }
+            if (update.Status.ToString() == "Approved")
+            {
+                if (record.OvertimeType == 0)
+                {
+                    if (record.JmlJam == 1)
+                    {
+                        record.UpahLembur = record.JmlJam * 1.5 * 0.005780347 * record1.Salary;
+                    }
+                    else
+                    {
+                        record.UpahLembur = record.JmlJam * 2 * 0.005780347 * record1.Salary;
+                    }
+                }
+                else if (record.OvertimeType != 0)
+                {
+                    if (record.JmlJam < 9)
+                    {
+                        record.UpahLembur = record.JmlJam * 2 * 0.005780347 * record1.Salary;
+                    }
+                    else if (record.JmlJam == 9)
+                    {
+                        record.UpahLembur = record.JmlJam * 3 * 0.005780347 * record1.Salary;
+                    }
+                    else if (record.JmlJam <= 10)
+                    {
+                        record.UpahLembur = record.JmlJam * 4 * 0.005780347 * record1.Salary;
+                    }
+                }
+                _context.SaveChanges();
+            }
+            if (update.Status.ToString() == "Done")
+            {
+                _context.SaveChanges();
+                return 2;
+            }
 
             return 0;
+        }
+
+        public Account GetNIK(string email)
+        {
+            var account = _context.Accounts.Where(e => e.Email == email).FirstOrDefault();
+            return account;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using API.Models;
+using API.ViewModels;
 using Client.Base;
 using Client.Repositories.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +32,28 @@ namespace Client.Controllers
         {
             var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
             var result = await repository.SplkEmployee(email);
+            return Json(result);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> SplkFinance()
+        {
+            var result = await repository.SplkFinance();
+            return Json(result);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetNIK()
+        {
+            var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = await repository.GetNIK(email);
+            return Json(result);
+        }
+
+        [HttpPost]
+        public JsonResult UpdateSplk([FromForm] SplkUpdateVM entity)
+        {
+            var result = repository.UpdateSplk(entity);
             return Json(result);
         }
     }

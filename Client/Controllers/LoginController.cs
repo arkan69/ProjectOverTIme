@@ -31,7 +31,7 @@ namespace Client.Controllers
             HttpContext.Session.SetString("JWToken", token);
 
 
-            return RedirectToAction("Index", "Employee"); //?
+            return RedirectToAction("Index", "Home"); //?
         }
 
         public IActionResult Index()

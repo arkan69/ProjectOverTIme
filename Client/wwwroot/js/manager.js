@@ -123,10 +123,15 @@ function detailmanager(key) {
         url: 'https://localhost:7092/api/Splks/' + key
     }).done((result) => {
         console.log(result);
+        console.log(result.data.status != 0);
+        if (result.data.status != 0) {
+            $('#btnApprovedManager').attr('disabled', true);
+            $('#btnRejectedManager').attr('disabled', true);
+        }
         //$('.createEmployee').modal('show');
-        //$('#exampleModalLabel').html("Detail SPLK");
+        $("#detailFormManager").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
         $('#detailMnik').prop('readonly', true);
-        $('#detailMik').val(result.data.nik).readonly;
+        $('#detailMnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
             $('#detailMjenislembur').val("Kerja");
         } else {
@@ -143,7 +148,7 @@ function detailmanager(key) {
         $('#detailMjamselesai').val(ed_modified);
         $('#detailMdeskripsi').val(result.data.description);
         imgElemM.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
-       
+
         //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
     }).fail((error) => {
@@ -171,10 +176,16 @@ $("#btnApprovedManager").click(function (e) {
     }).then((result) => {
         if (result.isConfirmed) {
             // Object
+            var fd = new FormData();
+            fd.append('id', $("#hidden_id").val());
+            fd.append('nik', $("#detailMnik").val());
+            fd.append('status', 2);
             $.ajax({
-               // url: 'https://localhost:7234/api/Employees/' + key,
-               // type: "DELETE",
-
+                type: "POST",
+                url: "../Employee/UpdateSplk",
+                data: fd,
+                processData: false,
+                contentType: false,
             }).done((result) => {
                 Swal.fire(
                     'Approved',
@@ -182,7 +193,7 @@ $("#btnApprovedManager").click(function (e) {
                     'success'
                 )
                 table.ajax.reload();
-                $('.detailModal').modal('hide');
+                $('.detailModalManager').modal('hide');
 
             }).fail((error) => {
                 console.log(error);
@@ -193,7 +204,7 @@ $("#btnApprovedManager").click(function (e) {
                 )
             })
         }
-    })   
+    })
 });
 
 // Action Function Rejected
@@ -212,9 +223,16 @@ $("#btnRejectedManager").click(function (e) {
     }).then((result) => {
         if (result.isConfirmed) {
             // Object
+            var fd = new FormData();
+            fd.append('id', $("#hidden_id").val());
+            fd.append('nik', $("#detailMnik").val());
+            fd.append('status', 1);
             $.ajax({
-                // url: 'https://localhost:7234/api/Employees/' + key,
-                // type: "DELETE",
+                type: "POST",
+                url: "../Employee/UpdateSplk",
+                data: fd,
+                processData: false,
+                contentType: false,
 
             }).done((result) => {
                 Swal.fire(

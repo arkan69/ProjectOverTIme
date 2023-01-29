@@ -38,7 +38,7 @@ namespace API.Controllers
 
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet("Manager")]
         public ActionResult SplkEmployee(string email)
         {
@@ -55,7 +55,39 @@ namespace API.Controllers
             }
         }
 
-        [HttpPut("TestUpdate")]
+        [HttpGet("GetFinance")]
+        public ActionResult GetAll()
+        {
+            try
+            {
+                var result = _repositories.GetFinance();
+                return result.Count() == 0
+                    ? Ok(new { statusCode = 200, message = "Data Not Found!" })
+                    : Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { statusCode = 500, message = "Something Wrong!! " + ex });
+            }
+        }
+
+        [HttpGet("GetNIK")]
+        public ActionResult GetNIK(string email)
+        {
+            try
+            {
+                var result = _repositories.GetNIK(email);
+                return result == null
+                    ? Ok(new { statusCode = 200, message = "Data Not Found!" })
+                    : Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { statusCode = 500, message = "Something Wrong!! " + ex });
+            }
+        }
+
+        [HttpPost("TestUpdate")]
         public ActionResult UpdateForm(SplkUpdateVM update)
         {
             try

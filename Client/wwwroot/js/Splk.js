@@ -176,20 +176,18 @@ $(document).ready(function () {
 // Action Function Insert & Update
 $("#btnSaveSplk").click(function (e) {
     e.preventDefault();
-    if ($("#formSplk").valid()) {
+    //if ($("#formSplk").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
             console.log("INI INSERT");
             InsertSplkForm();
-        } 
-    }
+        }
+   // }
 });
 
 // Clear Modal Insert Employee
-function InsertSplk() {
-    //$('#labelText').html("Create New Employee");
+function InsertSplkForm() {
     $('#nik').val("");
-    //$('#nik').removeAttr('readonly');
     //$('#firstName').val("");
     //$('#lastName').val("");
     //$('#email').val("");
@@ -198,36 +196,62 @@ function InsertSplk() {
     //$("[name=gender]").attr('checked', false);
     //$('#birthDate').val("");
     $('#btnSaveSplk').attr('data-name', 'insert').html("<span class='fas fa-save'>&nbsp;</span>Save");
+
+    //get NIK
+    $.ajax({
+        url: '../Employee/GetNIK'
+    }).done((result) => {
+        $('#nik').val(result.nik);
+        $('#nik').prop('readonly', true);
+    })
+
 };
+
+function GetSPLKEmployee() {
+    $.ajax({
+        url: '../Employee/GetMasterEmployee'
+    }).done((result) => {
+        console.log(result);
+        return result;
+    })
+}
+
+const data = GetSPLKEmployee();
+console.log("data baru", data);
 
 //INSERT NEW 1
 function InsertSplkForm() {
-    let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
-    let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
-
+    let Start = new Date($("#tglmulai").val() + 'T' + $("#jammulai").val());
+    let End = new Date($("#tglmulai").val() + 'T' + $("#jamselesai").val());
+    let today = new Date();
     //Hitung selisih Jam
-    let duration = (new Date(End)).getTime() - (new Date(Start)).getTime(); 
+    let duration = End.getTime() - Start.getTime();
     let durationMinutes = duration / (1000 * 60);
-    let hours = Math.floor(durationMinutes / 60);
+    let hours = Math.floor(durationMinutes / 60); 
 
     var fd = new FormData();
     fd.append('nik', $("#nik").val())
     fd.append('overtimeType', $('#jenislembur').val());
-    fd.append('StartDate',Start);
+    fd.append('StartDate', Start);
     fd.append('EndDate', End);
     fd.append('description', $("#deskripsi").val());
     fd.append('JmlJam', hours);
     fd.append('file', $('#buktifile')[0].files[0]);
 
-    console.log(fd);
-
-    $.ajax({
+    console.log("ini jam",hours);
+    if (Start.getTime() > today.getTime()) {
+        alert("Tanggal tidak boleh melebihi hari ini!");
+    }
+    else if (hours < 1 || hours > 4) {
+        alert("Pengambilan lembur min 1 jam atau max 4 jam!");
+    } else {
+        $.ajax({
         url: "../Splk/SplkForm",
         type: "POST",
         data: fd,
         processData: false,
         contentType: false,
-    }).done((result) => {
+        }).done((result) => {
         Swal.fire(
             'Success',
             "Data Berhasil ditambahkan",
@@ -235,7 +259,8 @@ function InsertSplkForm() {
         )
         table.ajax.reload();
         $('.insertModal').modal('hide');
-    })
+        })
+    }
 }
 
 //UPDATE
@@ -245,10 +270,9 @@ function detailSplk(key) {
         url: 'https://localhost:7092/api/Splks/' + key
     }).done((result) => {
         console.log(result);
-        //$('.createEmployee').modal('show');
-        //$('#exampleModalLabel').html("Detail SPLK");
+
         $('#detailnik').prop('readonly', true);
-        $('#detailik').val(result.data.nik).readonly;
+        $('#detailnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
             $('#detailjenislembur').val("Kerja");
         } else {
@@ -259,14 +283,12 @@ function detailSplk(key) {
         $('#detailtglmulai').val(startdate_modified);
 
         st_modified = Waktu(result.data.startDate);
-        $('#detailMjammulai').val(st_modified);
+        $('#detailjammulai').val(st_modified);
 
         ed_modified = Waktu(result.data.endDate);
         $('#detailjamselesai').val(ed_modified);
         $('#detaildeskripsi').val(result.data.description);
         imgElem.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
-
-        //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
     }).fail((error) => {
         console.log(error);
@@ -290,4 +312,13 @@ function Waktu(waktu) {
     return time_modified;
 }
 
-
+var downloadButton = document.getElementById("download-image");
+downloadButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    var image = document.getElementById("imgElem");
+    var base64string = image.src;
+    var link = document.createElement("a");
+    link.download = "image.jpg";
+    link.href = base64string;
+    link.click();
+});

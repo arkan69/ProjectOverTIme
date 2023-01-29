@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     table = $("#table_finance").DataTable({
         ajax: {
-            "url": "https://localhost:7092/api/Splks/",
+            "url": "../Employee/SplkFinance",
             "dataType": "Json",
             "dataSrc": ""
         },
@@ -76,7 +76,7 @@
                 "render": function (data, type, row) {
                     var getNik = row['id'];
                     return `<div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager">
+                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalManager">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -123,8 +123,10 @@ function detailfinance(key) {
         url: 'https://localhost:7092/api/Splks/' + key
     }).done((result) => {
         console.log(result);
-        //$('.createEmployee').modal('show');
-        //$('#exampleModalLabel').html("Detail SPLK");
+        if (result.data.status != 1) {
+            $('#btnApprovedManager').attr('disabled', true);
+            $('#btnRejectedManager').attr('disabled', true);
+        }
         $('#detailFnik').prop('readonly', true);
         $('#detailFnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
@@ -142,12 +144,7 @@ function detailfinance(key) {
         ed_modified = Waktu(result.data.endDate);
         $('#detailFjamselesai').val(ed_modified);
         $('#detail,deskripsi').val(result.data.description);
-        //$("#imagepreview").append("<img src='" + result.data.proofOvertime.imageBase64 + "' alt='' class='img-fluid'>");
         imgElemF.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
-        //$('#salary').val(result.data.salary);
-        //$("[name=gender][value=" + result.data.gender + "]").attr('checked', 'checked'); //setvalue
-
-        //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
     }).fail((error) => {
         console.log(error);
@@ -158,3 +155,49 @@ function detailfinance(key) {
         )
     });
 }
+
+// Action Function Approved
+$("#btnDoneFinance").click(function (e) {
+    Swal.fire({
+        title: 'Yakin ingin diApproved?',
+        text: "Surat Pengajuan akan di Setujui.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Ya Approved!',
+        cancelButtonText: 'Batal Approved'
+
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Object
+            var fd = new FormData();
+            fd.append('id', $("#hidden_id").val());
+            fd.append('nik', $("#detailMnik").val());
+            fd.append('status', 2);
+            $.ajax({
+                type: "POST",
+                url: "../Employee/UpdateSplk",
+                data: fd,
+                processData: false,
+                contentType: false,
+            }).done((result) => {
+                Swal.fire(
+                    'Approved',
+                    'SPLK Employee Berhasil diApproved',
+                    'success'
+                )
+                table.ajax.reload();
+                $('.detailModalManager').modal('hide');
+
+            }).fail((error) => {
+                console.log(error);
+                Swal.fire(
+                    'Opps!',
+                    'Something went wrong!',
+                    'error'
+                )
+            })
+        }
+    })
+});
