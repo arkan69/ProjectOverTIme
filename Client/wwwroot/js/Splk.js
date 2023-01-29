@@ -186,7 +186,7 @@ $("#btnSaveSplk").click(function (e) {
 });
 
 // Clear Modal Insert Employee
-function InsertSplkForm() {
+function InsertSplk() {
     $('#nik').val("");
     //$('#firstName').val("");
     //$('#lastName').val("");
@@ -221,13 +221,13 @@ console.log("data baru", data);
 
 //INSERT NEW 1
 function InsertSplkForm() {
-    let Start = new Date($("#tglmulai").val() + 'T' + $("#jammulai").val());
-    let End = new Date($("#tglmulai").val() + 'T' + $("#jamselesai").val());
-    let today = new Date();
+    let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
+    let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
+
     //Hitung selisih Jam
-    let duration = End.getTime() - Start.getTime();
+    let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
     let durationMinutes = duration / (1000 * 60);
-    let hours = Math.floor(durationMinutes / 60); 
+    let hours = Math.floor(durationMinutes / 60);
 
     var fd = new FormData();
     fd.append('nik', $("#nik").val())
@@ -238,7 +238,6 @@ function InsertSplkForm() {
     fd.append('JmlJam', hours);
     fd.append('file', $('#buktifile')[0].files[0]);
 
-    console.log("ini jam",hours);
     if (Start.getTime() > today.getTime()) {
         alert("Tanggal tidak boleh melebihi hari ini!");
     }
@@ -246,19 +245,19 @@ function InsertSplkForm() {
         alert("Pengambilan lembur min 1 jam atau max 4 jam!");
     } else {
         $.ajax({
-        url: "../Splk/SplkForm",
-        type: "POST",
-        data: fd,
-        processData: false,
-        contentType: false,
+            url: "../Splk/SplkForm",
+            type: "POST",
+            data: fd,
+            processData: false,
+            contentType: false,
         }).done((result) => {
-        Swal.fire(
-            'Success',
-            "Data Berhasil ditambahkan",
-            'success'
-        )
-        table.ajax.reload();
-        $('.insertModal').modal('hide');
+            Swal.fire(
+                'Success',
+                "Data Berhasil ditambahkan",
+                'success'
+            )
+            table.ajax.reload();
+            $('.insertModal').modal('hide');
         })
     }
 }

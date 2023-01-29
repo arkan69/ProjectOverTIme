@@ -91,7 +91,7 @@ namespace API.Controllers
                             _confi["JWT:Issuer"],
                             _confi["JWT:Audience"],
                             claims,
-                            expires: DateTime.Now.AddMinutes(5),
+                            expires: DateTime.Now.AddMinutes(15),
                             signingCredentials: signIn
                             );
                         var IdToken = new JwtSecurityTokenHandler().WriteToken(token);
