@@ -188,13 +188,12 @@ $("#btnSaveSplk").click(function (e) {
 // Clear Modal Insert Employee
 function InsertSplk() {
     $('#nik').val("");
-    //$('#firstName').val("");
-    //$('#lastName').val("");
-    //$('#email').val("");
-    //$('#phone').val("");
-    //$('#salary').val("");
-    //$("[name=gender]").attr('checked', false);
-    //$('#birthDate').val("");
+    $('#jenislembur').val("");
+    $('#tglmulai').val("");
+    $('#jammulai').val("");
+    $('#jamselesai').val("");
+    $('#deskripsi').val("");
+    $('#buktifile').val("");
     $('#btnSaveSplk').attr('data-name', 'insert').html("<span class='fas fa-save'>&nbsp;</span>Save");
 
     //get NIK
@@ -223,7 +222,7 @@ console.log("data baru", data);
 function InsertSplkForm() {
     let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
     let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
-
+    let today = new Date();
     //Hitung selisih Jam
     let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
     let durationMinutes = duration / (1000 * 60);
@@ -238,7 +237,7 @@ function InsertSplkForm() {
     fd.append('JmlJam', hours);
     fd.append('file', $('#buktifile')[0].files[0]);
 
-    if (Start.getTime() > today.getTime()) {
+    if ((new Date(Start)).getTime() > today.getTime()) {
         alert("Tanggal tidak boleh melebihi hari ini!");
     }
     else if (hours < 1 || hours > 4) {
