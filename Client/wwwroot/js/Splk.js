@@ -175,7 +175,7 @@ $(document).ready(function () {
 
 // Action Function Insert & Update
 $("#btnSaveSplk").click(function (e) {
-    e.preventDefault();
+    //e.preventDefault();
     //if ($("#formSplk").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
@@ -223,6 +223,7 @@ function InsertSplkForm() {
     let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
     let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
     let today = new Date();
+
     //Hitung selisih Jam
     let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
     let durationMinutes = duration / (1000 * 60);
