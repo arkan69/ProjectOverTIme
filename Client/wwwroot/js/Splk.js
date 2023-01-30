@@ -79,6 +79,14 @@
                                     <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-sm btn-circle btn-warning" data-bs-toggle="modal" onclick="updateSplk('${getNik}')" data-bs-target="#updateModal">
+                                        <span class="fas fa-edit"></span>
+                                    </button>
+                                    &nbsp;
+                                    <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="DeleteSpkl('${getNik}')" ">
+                                        <span class="fas fa-trash"></span>
+                                    </button>
                                 </div>
                             `;
                 },
@@ -271,23 +279,32 @@ function detailSplk(key) {
     }).done((result) => {
         console.log(result);
 
-        $('#detailnik').prop('readonly', true);
-        $('#detailnik').val(result.data.nik).readonly;
+        //$('#detailnik').prop('readonly', true);
+        //$('#detailnik').val(result.data.nik).readonly;
+        document.getElementById('detailniks').innerHTML = result.data.nik;
         if (result.data.overtimeType == 0) {
-            $('#detailjenislembur').val("Kerja");
+            //$('#detailjenislembur').val("Kerja");
+            document.getElementById('detailjenislemburs').innerHTML = "Work";
         } else {
-            $('#detailjenislembur').val("Libur");
+            //$('#detailjenislembur').val("Libur");
+            document.getElementById('detailjenislemburs').innerHTML = "Holiday";
         }
 
         startdate_modified = Tanggal(result.data.startDate);
-        $('#detailtglmulai').val(startdate_modified);
+        //$('#detailtglmulai').val(startdate_modified);
+        document.getElementById('detailtglmulais').innerHTML = startdate_modified;
 
         st_modified = Waktu(result.data.startDate);
-        $('#detailjammulai').val(st_modified);
+        //$('#detailjammulai').val(st_modified);
+        document.getElementById('detailjammulais').innerHTML = st_modified;
 
         ed_modified = Waktu(result.data.endDate);
-        $('#detailjamselesai').val(ed_modified);
-        $('#detaildeskripsi').val(result.data.description);
+        //$('#detailjamselesai').val(ed_modified);
+        document.getElementById('detailjamselesais').innerHTML = ed_modified;
+
+        //$('#detaildeskripsi').val(result.data.description);
+        document.getElementById('detaildeskripsis').innerHTML = result.data.description;
+
         imgElem.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
 
     }).fail((error) => {
@@ -322,3 +339,38 @@ downloadButton.addEventListener("click", function (event) {
     link.href = base64string;
     link.click();
 });
+
+//Detele data
+const DeleteSpkl = (key) => {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: 'DELETE',
+                url: `https://localhost:7092/api/Splks/${key}`,
+                success: () => {
+                    Swal.fire(
+                        'Deleted',
+                        'Employee has been deleted.',
+                        'success'
+                    )
+                    $('#table_splk').DataTable().ajax.reload()
+                },
+                error: () => {
+                    Swal.fire(
+                        'Failed',
+                        'Error deleting splk employee',
+                        'error'
+                    )
+                }
+            })
+        }
+    })
+}

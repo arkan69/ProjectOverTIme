@@ -4,7 +4,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary"> Surat Pengajuan Lembur Kerja Employee</h6>
+        <h6 class="m-0 font-weight-bold text-primary">List Overtime Request Manager (Manager)</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive tablediv">
@@ -13,10 +13,10 @@
                     <tr class="">
                         <td>No</td>
                         <td>NIK</td>
-                        <td>Jenis Lembur</td>
-                        <td>Tanggal Mulai</td>
-                        <td>Jam Mulai</td>
-                        <td>Jam Mulai</td>
+                        <td>Overtime Type</td>
+                        <td>Start Date</td>
+                        <td>Start Time</td>
+                        <td>End Time</td>
                         <td>Description</td>
                         <td>Status</td>
                         <td>Action</td>
@@ -42,37 +42,46 @@
                 <form id="detailFormManager">
                     <div class="mb-1">
                         <label for="nik" class="col-form-label">NIK:</label>
-                        <input type="text" class="form-control" id="detailMnik" name="detailMnik">
+                        @*<input type="text" class="form-control" id="detailMnik" name="detailMnik">*@
+                        <p id="detailMnik" name="detailMnik"></p>
                     </div>
                     <div class="mb-1">
-                        <label for="nik" class="col-form-label">Jenis Lembur:</label>
-                        <input type="text" class="form-control" id="detailMjenislembur" name="detailMjenislembur">
+                        <label for="nik" class="col-form-label">Overtime Type:</label>
+                        @*<input type="text" class="form-control" id="detailMjenislembur" name="detailMjenislembur">*@
+                        <p id="detailMjenislembur" name="detailMjenislembur"></p>
                     </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
-                        <input type="Date" class="form-control" id="detailMtglmulai" name="detailMtglmulai">
 
+                    <div class="row g-3 mb-1">
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Start Date:</label>
+                            @*<input type="Date" class="form-control" id="detailMtglmulai" name="detailMtglmulai">*@
+                            <p id="detailMtglmulai" name="detailMtglmulai"></p>
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Start Time:</label>
+                            @*<input type="time" class="form-control" id="detailMjammulai" name="detailMjammulai">*@
+                            <p id="detailMjammulai" name="detailMjammulai"></p>
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">End Time:</label>
+                            @*<input type="time" class="form-control" id="detailMjamselesai" name="detailMjamselesai">*@
+                            <p id="detailMjamselesai" name="detailMjamselesai"></p>
+                        </div>
                     </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
-                        <input type="time" class="form-control" id="detailMjammulai" name="detailMjammulai">
 
-                    </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
-                        <input type="time" class="form-control" id="detailMjamselesai" name="detailMjamselesai">
-
-                    </div>
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="detailMdeskripsi" name="detailMdeskripsi" rows="3"></textarea>
+                        @*<textarea class="form-control" id="detailMdeskripsi" name="detailMdeskripsi" rows="3"></textarea>*@
+                        <p id="detailMdeskripsi" name="detailMdeskripsi"></p>
                     </div>
-                    <div class="mb-1">
-                        <img id="imgElemM"></img>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Evidence:</label>
+                        <br />
+                        <img id="imgElemM" style="height: 40%; width: 40%; border-style: solid; border-width: 1px; border-color: lightgray;"></img>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="btnApprovedManager" class="btn btn-primary">Approve</button>
-                        <button type="button" id="btnRejectedManager" class="btn btn-primary">Reject</button>
+                        <button type="button" id="btnApprovedManager" class="btn btn-success">Approve</button>
+                        <button type="button" id="btnRejectedManager" class="btn btn-danger">Reject</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         
                     </div>

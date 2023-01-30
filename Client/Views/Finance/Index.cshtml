@@ -4,7 +4,7 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary"> Surat Pengajuan Lembur Kerja Approved by Manager</h6>
+        <h6 class="m-0 font-weight-bold text-primary">List Overtime Request Approved by Manager</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive tablediv">
@@ -13,11 +13,13 @@
                     <tr class="">
                         <td>No</td>
                         <td>NIK</td>
-                        <td>Jenis Lembur</td>
-                        <td>Tanggal Mulai</td>
-                        <td>Jam Mulai</td>
-                        <td>Jam Mulai</td>
+                        <td>Overtime Type</td>
+                        <td>Start Date</td>
+                        <td>Start Time</td>
+                        <td>End Time</td>
                         <td>Description</td>
+                        <td>Total Hours</td>
+                        <td>Earning</td>
                         <td>Status</td>
                         <td>Action</td>
                     </tr>
@@ -42,33 +44,43 @@
                 <form id="detailFormFinance">
                     <div class="mb-1">
                         <label for="nik" class="col-form-label">NIK:</label>
-                        <input type="text" class="form-control" id="detailFnik" name="detailFnik">
+                        @*<input type="text" class="form-control" id="detailFnik" name="detailFnik">*@
+                        <p id="detailFnik" name="detailFnik"></p>
                     </div>
-                    <div class="mb-1">
-                        <label for="nik" class="col-form-label">Jenis Lembur:</label>
-                        <input type="text" class="form-control" id="detailFjenislembur" name="detailFjenislembur">
-                    </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Tanggal Mulai:</label>
-                        <input type="Date" class="form-control" id="detailFtglmulai" name="detailFtglmulai">
 
-                    </div>
                     <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Mulai:</label>
-                        <input type="time" class="form-control" id="detailFjammulai" name="detailFjammulai">
-
+                        <label for="nik" class="col-form-label">Overtime Type:</label>
+                        @*<input type="text" class="form-control" id="detailFjenislembur" name="detailFjenislembur">*@
+                        <p id="detailFjenislembur" name="detailFjenislembur"></p>
                     </div>
-                    <div class="mb-1">
-                        <label for="recipient-name" class="col-form-label">Jam Selesai:</label>
-                        <input type="time" class="form-control" id="detailFjamselesai" name="detailFjamselesai">
 
+                    <div class="row g-3 mb-1">
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Start Date:</label>
+                            @*<input type="Date" class="form-control" id="detailFtglmulai" name="detailFtglmulai">*@
+                            <p id="detailFtglmulai" name="detailFtglmulai"></p>
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Start Time:</label>
+                            @*<input type="time" class="form-control" id="detailFjammulai" name="detailFjammulai">*@
+                            <p id="detailFjammulai" name="detailFjammulai"></p>
+                        </div>
+                        <div class="col-4">
+                            <label for="recipient-name" class="col-form-label">Start End:</label>
+                            @*<input type="time" class="form-control" id="detailFjamselesai" name="detailFjamselesai">*@
+                            <p id="detailFjamselesai" name="detailFjamselesai"></p>
+                        </div>
                     </div>
+
                     <div class="mb-1">
                         <label for="recipient-name" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="detailFdeskripsi" name="detailFdeskripsi" rows="3"></textarea>
+                        @*<textarea class="form-control" id="detailFdeskripsi" name="detailFdeskripsi" rows="3"></textarea>*@
+                        <p id="detailFdeskripsi" name="detailFdeskripsi"></p>
                     </div>
                     <div class="mb-1">
-                        <img id="imgElemF"></img>
+                        <label for="recipient-name" class="col-form-label">Evidence:</label>
+                        <br />
+                        <img id="imgElemF" style="height: 40%; width: 40%; border-style: solid; border-width: 1px; border-color: lightgray;"></img>
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="btnDoneFinance" class="btn btn-primary">Done</button>

@@ -55,6 +55,12 @@
             {
                 "data": null,
                 render: function (data, type, row, meta) {
+                    return formatRupiah(parseInt(row['upahLembur']));
+                }
+            },
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
                     switch (row['status']) {
                         case 0:
                             return "Pending"
@@ -75,8 +81,8 @@
                 "data": null,
                 "render": function (data, type, row) {
                     var getNik = row['id'];
-                    return `<div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalManager">
+                    return `<div class="btn-group d-flex justify-content-center">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalManager">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -127,23 +133,32 @@ function detailfinance(key) {
             $('#btnApprovedManager').attr('disabled', true);
             $('#btnRejectedManager').attr('disabled', true);
         }
-        $('#detailFnik').prop('readonly', true);
-        $('#detailFnik').val(result.data.nik).readonly;
+        //$('#detailFnik').prop('readonly', true);
+        //$('#detailFnik').val(result.data.nik).readonly;
+        document.getElementById('detailMnik').innerHTML = result.data.nik;
         if (result.data.overtimeType == 0) {
-            $('#detailFjenislembur').val("Kerja");
+            //$('#detailFjenislembur').val("Kerja");
+            document.getElementById('detailMnik').innerHTML = "Work";
         } else {
-            $('#detailFjenislembur').val("Libur");
+            //$('#detailFjenislembur').val("Libur");
+            document.getElementById('detailMnik').innerHTML = "Holiday";
         }
 
         startdate_modified = Tanggal(result.data.startDate);
-        $('#detailFtglmulai').val(startdate_modified);
+        //$('#detailFtglmulai').val(startdate_modified);
+        document.getElementById('detailMnik').innerHTML = startdate_modified;
 
         st_modified = Waktu(result.data.startDate);
-        $('#detailFjammulai').val(st_modified);
+        //$('#detailFjammulai').val(st_modified);
+        document.getElementById('detailMnik').innerHTML = st_modified;
 
         ed_modified = Waktu(result.data.endDate);
-        $('#detailFjamselesai').val(ed_modified);
-        $('#detail,deskripsi').val(result.data.description);
+        //$('#detailFjamselesai').val(ed_modified);
+        document.getElementById('detailMnik').innerHTML = ed_modified;
+
+        //$('#detail,deskripsi').val(result.data.description);
+        document.getElementById('detailMnik').innerHTML = result.data.description;
+
         imgElemF.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
 
     }).fail((error) => {

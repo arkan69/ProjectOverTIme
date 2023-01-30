@@ -75,8 +75,8 @@
                 "data": null,
                 "render": function (data, type, row) {
                     var getNik = row['id'];
-                    return `<div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager">
+                    return `<div class="btn-group d-flex justify-content-center">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -130,23 +130,32 @@ function detailmanager(key) {
         }
         //$('.createEmployee').modal('show');
         $("#detailFormManager").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
-        $('#detailMnik').prop('readonly', true);
-        $('#detailMnik').val(result.data.nik).readonly;
+        //$('#detailMnik').prop('readonly', true);
+        //$('#detailMnik').val(result.data.nik).readonly;
+        document.getElementById('detailMnik').innerHTML = result.data.nik;
         if (result.data.overtimeType == 0) {
-            $('#detailMjenislembur').val("Kerja");
+            //$('#detailMjenislembur').val("Kerja");
+            document.getElementById('detailMjenislembur').innerHTML = "Work";
         } else {
-            $('#detailMjenislembur').val("Libur");
+            //$('#detailMjenislembur').val("Libur");
+            document.getElementById('detailMjenislembur').innerHTML = "Holiday";
         }
 
         startdate_modified = Tanggal(result.data.startDate);
-        $('#detailMtglmulai').val(startdate_modified);
+        //$('#detailMtglmulai').val(startdate_modified);
+        document.getElementById('detailMtglmulai').innerHTML = startdate_modified;
 
         st_modified = Waktu(result.data.startDate);
-        $('#detailMjammulai').val(st_modified);
+        //$('#detailMjammulai').val(st_modified);
+        document.getElementById('detailMjammulai').innerHTML = st_modified;
 
         ed_modified = Waktu(result.data.endDate);
-        $('#detailMjamselesai').val(ed_modified);
-        $('#detailMdeskripsi').val(result.data.description);
+        //$('#detailMjamselesai').val(ed_modified);
+        document.getElementById('detailMjamselesai').innerHTML = ed_modified;
+
+        //$('#detailMdeskripsi').val(result.data.description);
+        document.getElementById('detailMdeskripsi').innerHTML = result.data.description;
+
         imgElemM.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
 
         //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");

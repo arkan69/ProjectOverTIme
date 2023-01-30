@@ -55,7 +55,7 @@ namespace API.Repositories.Data
                 AccountRole accountRole = new AccountRole()
                 {
                     AccountNIK = account.NIK,
-                    RoleId = 2
+                    RoleId = 4
                 };
                 _context.AccountRoles.Add(accountRole);
                 _context.SaveChanges();

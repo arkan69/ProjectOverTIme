@@ -22,3 +22,21 @@ img {
     max-width: 400px;
     height: auto;
 }
+
+#detailFormSplk label {
+    font-size: 14px;
+    color: #171717;
+    font-weight: bold;
+}
+
+#detailFormManager label {
+    font-size: 14px;
+    color: #171717;
+    font-weight: bold;
+}
+
+#detailFormFinance label {
+    font-size: 14px;
+    color: #171717;
+    font-weight: bold;
+}
