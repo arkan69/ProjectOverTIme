@@ -196,13 +196,12 @@ $("#btnSaveSplk").click(function (e) {
 // Clear Modal Insert Employee
 function InsertSplk() {
     $('#nik').val("");
-    //$('#firstName').val("");
-    //$('#lastName').val("");
-    //$('#email').val("");
-    //$('#phone').val("");
-    //$('#salary').val("");
-    //$("[name=gender]").attr('checked', false);
-    //$('#birthDate').val("");
+    $('#jenislembur').val("");
+    $('#tglmulai').val("");
+    $('#jammulai').val("");
+    $('#jamselesai').val("");
+    $('#deskripsi').val("");
+    $('#buktifile').val("");
     $('#btnSaveSplk').attr('data-name', 'insert').html("<span class='fas fa-save'>&nbsp;</span>Save");
 
     //get NIK

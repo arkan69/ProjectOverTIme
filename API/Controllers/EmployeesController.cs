@@ -87,6 +87,38 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("GetChart")]
+        public ActionResult GetChart(string NIK)
+        {
+            try
+            {
+                var result = _repositories.GetChart(NIK);
+                return result == null
+                    ? Ok(new { statusCode = 200, message = "Data Not Found!" })
+                    : Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { statusCode = 500, message = "Something Wrong!! " + ex });
+            }
+        }
+
+        //[HttpGet("EmployeeCount")]
+        //public ActionResult GetEmployeeCount()
+        //{
+        //    try
+        //    {
+        //        var get = _repositories.TotalemployeeSPLK();
+        //        return get == null
+        //            ? NotFound(new { message = "Data Tidak Ada" })
+        //            : (ActionResult)Ok(_repositories.TotalemployeeSPLK);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(e);
+        //    }
+        //}
+
         [HttpPost("TestUpdate")]
         public ActionResult UpdateForm(SplkUpdateVM update)
         {

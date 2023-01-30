@@ -27,7 +27,6 @@ namespace API.Repositories.Data
                 (ae, s) => new
                 {
                     //ManagerId = ae.e.ManagerId,
-
                     //FullName = (ae.e.FirstName + " " + ae.e.LastName),
                     Id = s.Id,
                     nik = s.NIK,
@@ -120,5 +119,20 @@ namespace API.Repositories.Data
             var account = _context.Accounts.Where(e => e.Email == email).FirstOrDefault();
             return account;
         }
-    }
+
+        public List<SPLK> GetChart(string NIK)
+        {
+            var currentMonth = DateTime.Now.Month;
+            var result = _context.Splk.Where(x => x.NIK == NIK && x.StartDate.Month == currentMonth).ToList();
+            return result;
+        }
+
+        //public ChartVM TotalemployeeSPLK()
+        //{
+        //    string[] getLabels = context.Universities.Select(u => u.Name).OrderBy(u => u).ToArray();
+        //    int[] getSeries = _context.Splk.Select(u => u.NIK.Count).OrderBy(u => u).ToArray();
+
+        //    return new ChartVM(getSeries);
+        //}
+}
 }

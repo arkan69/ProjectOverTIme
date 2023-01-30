@@ -53,6 +53,15 @@
                 "data": "description"
             },
             {
+                "data": "jmlJam"
+            },
+            {
+                "data": null,
+                render: function (data, type, row, meta) {
+                    return formatRupiah(parseInt(row['upahLembur']));
+                }
+            },
+            {
                 "data": null,
                 render: function (data, type, row, meta) {
                     return formatRupiah(parseInt(row['upahLembur']));
@@ -133,9 +142,9 @@ function detailfinance(key) {
             $('#btnApprovedManager').attr('disabled', true);
             $('#btnRejectedManager').attr('disabled', true);
         }
-        //$('#detailFnik').prop('readonly', true);
-        //$('#detailFnik').val(result.data.nik).readonly;
-        document.getElementById('detailMnik').innerHTML = result.data.nik;
+        $("#detailFormFinance").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
+        $('#detailFnik').prop('readonly', true);
+        $('#detailFnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
             //$('#detailFjenislembur').val("Kerja");
             document.getElementById('detailMnik').innerHTML = "Work";
@@ -189,7 +198,7 @@ $("#btnDoneFinance").click(function (e) {
             var fd = new FormData();
             fd.append('id', $("#hidden_id").val());
             fd.append('nik', $("#detailMnik").val());
-            fd.append('status', 2);
+            fd.append('status', 3);
             $.ajax({
                 type: "POST",
                 url: "../Employee/UpdateSplk",
