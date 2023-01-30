@@ -57,16 +57,24 @@
                 render: function (data, type, row, meta) {
                     switch (row['status']) {
                         case 0:
-                            return "Pending"
+                            return `<div class="badge bg-secondary text-wrap" style="width: 6rem;">
+                                      Pending
+                                    </div>`
                             break;
                         case 1:
-                            return "Refuse"
+                            return `<div class="badge bg-danger text-wrap" style="width: 6rem;">
+                                      Refuse
+                                    </div>`
                             break;
                         case 2:
-                            return "Approved"
+                            return `<div class="badge bg-info text-wrap" style="width: 6rem;">
+                                      Approve
+                                    </div>`
                             break;
                         default:
-                            return "Done"
+                            return `<div class="badge bg-success text-wrap" style="width: 6rem;">
+                                      Done
+                                    </div>`
                     }
 
                 }
@@ -93,21 +101,21 @@
                 extend: 'excelHtml5',
                 className: 'btn btn-success mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'csvHtml5',
                 className: 'btn btn-warning mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 className: 'btn btn-info mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             }
         ]
@@ -130,9 +138,8 @@ function detailmanager(key) {
         }
         //$('.createEmployee').modal('show');
         $("#detailFormManager").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
-        //$('#detailMnik').prop('readonly', true);
-        //$('#detailMnik').val(result.data.nik).readonly;
-        document.getElementById('detailMnik').innerHTML = result.data.nik;
+        $('#detailMnik').prop('readonly', true);
+        $('#detailMnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
             //$('#detailMjenislembur').val("Kerja");
             document.getElementById('detailMjenislembur').innerHTML = "Work";
@@ -142,7 +149,7 @@ function detailmanager(key) {
         }
 
         startdate_modified = Tanggal(result.data.startDate);
-        //$('#detailMtglmulai').val(startdate_modified);
+        //('#detailMtglmulai').val(startdate_modified);
         document.getElementById('detailMtglmulai').innerHTML = startdate_modified;
 
         st_modified = Waktu(result.data.startDate);

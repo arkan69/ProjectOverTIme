@@ -64,24 +64,26 @@
             {
                 "data": null,
                 render: function (data, type, row, meta) {
-                    return formatRupiah(parseInt(row['upahLembur']));
-                }
-            },
-            {
-                "data": null,
-                render: function (data, type, row, meta) {
                     switch (row['status']) {
                         case 0:
-                            return "Pending"
+                            return `<div class="badge bg-secondary text-wrap" style="width: 6rem;">
+                                      Pending
+                                    </div>`
                             break;
                         case 1:
-                            return "Refuse"
+                            return `<div class="badge bg-danger text-wrap" style="width: 6rem;">
+                                      Refuse
+                                    </div>`
                             break;
                         case 2:
-                            return "Approved"
+                            return `<div class="badge bg-info text-wrap" style="width: 6rem;">
+                                      Approve
+                                    </div>`
                             break;
                         default:
-                            return "Done"
+                            return `<div class="badge bg-success text-wrap" style="width: 6rem;">
+                                      Done
+                                    </div>`
                     }
 
                 }
@@ -108,21 +110,21 @@
                 extend: 'excelHtml5',
                 className: 'btn btn-success mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'csvHtml5',
                 className: 'btn btn-warning mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'pdfHtml5',
                 className: 'btn btn-info mb-3',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             }
         ]
@@ -147,26 +149,26 @@ function detailfinance(key) {
         $('#detailFnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
             //$('#detailFjenislembur').val("Kerja");
-            document.getElementById('detailMnik').innerHTML = "Work";
+            document.getElementById('detailFjenislembur').innerHTML = "Work";
         } else {
             //$('#detailFjenislembur').val("Libur");
-            document.getElementById('detailMnik').innerHTML = "Holiday";
+            document.getElementById('detailFjenislembur').innerHTML = "Holiday";
         }
 
         startdate_modified = Tanggal(result.data.startDate);
         //$('#detailFtglmulai').val(startdate_modified);
-        document.getElementById('detailMnik').innerHTML = startdate_modified;
+        document.getElementById('detailFtglmulai').innerHTML = startdate_modified;
 
         st_modified = Waktu(result.data.startDate);
         //$('#detailFjammulai').val(st_modified);
-        document.getElementById('detailMnik').innerHTML = st_modified;
+        document.getElementById('detailFjammulai').innerHTML = st_modified;
 
         ed_modified = Waktu(result.data.endDate);
         //$('#detailFjamselesai').val(ed_modified);
-        document.getElementById('detailMnik').innerHTML = ed_modified;
+        document.getElementById('detailFjamselesai').innerHTML = ed_modified;
 
-        //$('#detail,deskripsi').val(result.data.description);
-        document.getElementById('detailMnik').innerHTML = result.data.description;
+        //$('#detailFdeskripsi').val(result.data.description);
+        document.getElementById('detailFdeskripsi').innerHTML = startdate_modified;
 
         imgElemF.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
 

@@ -123,7 +123,7 @@ namespace API.Repositories.Data
         public List<SPLK> GetChart(string NIK)
         {
             var currentMonth = DateTime.Now.Month;
-            var result = _context.Splk.Where(x => x.NIK == NIK && x.StartDate.Month == currentMonth).ToList();
+            var result = _context.Splk.Where(x => x.NIK == NIK && x.StartDate.Month == currentMonth && x.Status == Status.Approved).ToList();
             return result;
         }
 
