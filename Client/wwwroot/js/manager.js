@@ -126,6 +126,8 @@
 
 //UPDATE
 function detailmanager(key) {
+    $('#btnApprovedManager').attr('disabled', false);
+    $('#btnRejectedManager').attr('disabled', false);
     console.log(key);
     $.ajax({
         url: 'https://localhost:7092/api/Splks/' + key

@@ -122,7 +122,7 @@
             },
             {
                 extend: 'pdfHtml5',
-                className: 'btn btn-info mb-3',
+                className: 'btn btn-danger mb-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
