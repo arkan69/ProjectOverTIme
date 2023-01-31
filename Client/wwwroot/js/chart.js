@@ -44,7 +44,7 @@ $.ajax({
             width: 480,
             type: 'pie',
         },
-        labels: ['Employee Ambil Lembur', 'Employee Tidak Ambil Lembur'],
+        labels: ['Employees take overtime', 'Employees don\'t take overtime'],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -148,9 +148,9 @@ document.getElementById("nikemployee").onchange = function () {
             series: [ambil, sisa],
             chart: {
                 width: 380,
-                type: 'pie',
+                type: 'pie',    
             },
-            labels: ['Ambil', 'Sisa'],
+            labels: ['Takes', 'Remains'],
             responsive: [{
                 breakpoint: 480,
                 options: {
