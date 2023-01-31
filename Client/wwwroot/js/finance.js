@@ -168,7 +168,7 @@ function detailfinance(key) {
         document.getElementById('detailFjamselesai').innerHTML = ed_modified;
 
         //$('#detailFdeskripsi').val(result.data.description);
-        document.getElementById('detailFdeskripsi').innerHTML = startdate_modified;
+        document.getElementById('detailFdeskripsi').innerHTML = result.data.description;
 
         imgElemF.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
 

@@ -84,7 +84,7 @@
                 "render": function (data, type, row) {
                     var getNik = row['id'];
                     return `<div class="btn-group d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager" title="Detail">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
