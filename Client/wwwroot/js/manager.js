@@ -84,7 +84,7 @@
                 "render": function (data, type, row) {
                     var getNik = row['id'];
                     return `<div class="btn-group d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager" title="Detail">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -165,7 +165,7 @@ function detailmanager(key) {
         //$('#detailMdeskripsi').val(result.data.description);
         document.getElementById('detailMdeskripsi').innerHTML = result.data.description;
 
-        imgElemM.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
+        imgElemM.setAttribute('src', "data:application/pdf;base64," + result.data.proofOvertime);
 
         //$('#btnInsertEmployee').attr('data-name', 'update').html("<span class='fas fa-save'>&nbsp;</span>Update");
 
@@ -271,4 +271,15 @@ $("#btnRejectedManager").click(function (e) {
             })
         }
     })
+});
+
+var downloadButton = document.getElementById("download-pdf-manager");
+downloadButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    var image = document.getElementById("imgElemM");
+    var base64string = image.src;
+    var link = document.createElement("a");
+    link.download = "filebukti.pdf";
+    link.href = base64string;
+    link.click();
 });

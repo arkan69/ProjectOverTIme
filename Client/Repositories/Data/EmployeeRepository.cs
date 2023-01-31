@@ -86,6 +86,16 @@ namespace Client.Repositories.Data
             return entities;
         }
 
+        public async Task <List<int>> GetCountEmployee(string email)
+        {
+            using (var response = await httpClient.GetAsync(address.link + request + "EmployeeCount?email=" + email))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                List<int> entities = JsonConvert.DeserializeObject<List<int>>(apiResponse);
+                return entities;
+            }
+        }
+
         public HttpStatusCode UpdateSplk(SplkUpdateVM entity)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");

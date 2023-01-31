@@ -250,12 +250,17 @@ function InsertSplkForm() {
     fd.append('JmlJam', hours);
     fd.append('file', $('#buktifile')[0].files[0]);
 
+    console.log("cek", $('#jenislembur').val());
     if ((new Date(Start)).getTime() > today.getTime()) {
         alert("Tanggal tidak boleh melebihi hari ini!");
     }
-    else if (hours < 1 || hours > 4) {
-        alert("Pengambilan lembur min 1 jam atau max 4 jam!");
+    else if (($('#jenislembur').val() == 0) && (hours < 1 || hours > 4)) {
+        alert("Pengambilan lembur Kerja min 1 jam atau max 4 jam!");
+    }
+    else if (($('#jenislembur').val() == 1) && (hours < 1 || hours > 10)) {
+        alert("Pengambilan lembur Libur min 1 jam atau max 10 jam!");
     } else {
+        console.log("tembus");
         $.ajax({
             url: "../Splk/SplkForm",
             type: "POST",
@@ -308,7 +313,7 @@ function detailSplk(key) {
         //$('#detaildeskripsi').val(result.data.description);
         document.getElementById('detaildeskripsis').innerHTML = result.data.description;
 
-        imgElem.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
+        imgElem.setAttribute('src', "data:application/pdf;base64," + result.data.proofOvertime);
 
     }).fail((error) => {
         console.log(error);
@@ -332,13 +337,13 @@ function Waktu(waktu) {
     return time_modified;
 }
 
-var downloadButton = document.getElementById("download-image");
+var downloadButton = document.getElementById("download-pdf-employ");
 downloadButton.addEventListener("click", function (event) {
     event.preventDefault();
     var image = document.getElementById("imgElem");
     var base64string = image.src;
     var link = document.createElement("a");
-    link.download = "image.jpg";
+    link.download = "filebukti.pdf";
     link.href = base64string;
     link.click();
 });

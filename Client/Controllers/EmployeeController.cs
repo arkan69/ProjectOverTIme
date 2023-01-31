@@ -50,6 +50,14 @@ namespace Client.Controllers
             return Json(result);
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetCountEmployee()
+        {
+            var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = await repository.GetCountEmployee(email);
+            return Json(result);
+        }
+
         [HttpPost]
         public JsonResult UpdateSplk([FromForm] SplkUpdateVM entity)
         {

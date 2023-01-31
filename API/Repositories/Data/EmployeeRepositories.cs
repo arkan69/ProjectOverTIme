@@ -127,21 +127,28 @@ namespace API.Repositories.Data
             return result;
         }
 
-        public IEnumerable TotalemployeeSPLK(string email)
+        public List<int> TotalemployeeSPLK(string email)
         {
             //string[] getLabels = context.Universities.Select(u => u.Name).OrderBy(u => u).ToArray();
-            var result = _context.Accounts
+            var res_splk = _context.Accounts
                 .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
                 (a, e) => new { a, e })
                 .Join(_context.Splk, ae => ae.e.NIK, s => s.NIK,
                 (ae, s) => new
                 {
-                   
-                    nik = s.NIK,
-                     ae.a.Email
-                }).Where(ea => ea.Email == email).Distinct().ToList();
 
-            return result;
+                    nik = s.NIK,
+                    ae.a.Email
+                }).Where(ea => ea.Email == email).Distinct().ToList().Count();
+
+            var res_employ = _context.Accounts
+                .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
+                (a, e) => new { 
+                    nik = e.NIK,
+                    a.Email
+                }).Where(ea => ea.Email == email).Distinct().ToList().Count();
+            List<int> arr = new List<int> { res_splk, res_employ };
+            return arr;
         }
     }
 }
