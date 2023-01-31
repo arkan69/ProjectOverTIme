@@ -144,7 +144,8 @@ function detailfinance(key) {
             $('#btnApprovedManager').attr('disabled', true);
             $('#btnRejectedManager').attr('disabled', true);
         }
-        $("#detailFormFinance").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
+        //$("#detailFormFinance").append(`<input type='hidden' id='hidden_id_finance' name='hidden_id_finance' value='${key}'>`);
+        $('#hidden_id_finance').val(key).readonly;
         $('#detailFnik').prop('readonly', true);
         $('#detailFnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
@@ -170,7 +171,7 @@ function detailfinance(key) {
         //$('#detailFdeskripsi').val(result.data.description);
         document.getElementById('detailFdeskripsi').innerHTML = result.data.description;
 
-        imgElemF.setAttribute('src', "data:image/jpg;base64," + result.data.proofOvertime);
+        imgElemF.setAttribute('src', "data:application/pdf;base64," + result.data.proofOvertime);
 
     }).fail((error) => {
         console.log(error);
@@ -198,7 +199,7 @@ $("#btnDoneFinance").click(function (e) {
         if (result.isConfirmed) {
             // Object
             var fd = new FormData();
-            fd.append('id', $("#hidden_id").val());
+            fd.append('id', $("#hidden_id_finance").val());
             fd.append('nik', $("#detailMnik").val());
             fd.append('status', 3);
             $.ajax({
@@ -214,7 +215,7 @@ $("#btnDoneFinance").click(function (e) {
                     'success'
                 )
                 table_finance.ajax.reload();
-                $('.detailModalManager').modal('hide');
+                $('.detailModalFinance').modal('hide');
 
             }).fail((error) => {
                 console.log(error);

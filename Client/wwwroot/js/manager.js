@@ -139,7 +139,8 @@ function detailmanager(key) {
             $('#btnRejectedManager').attr('disabled', true);
         }
         //$('.createEmployee').modal('show');
-        $("#detailFormManager").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
+        //$("#detailFormManager").append(`<input type='hidden' id='hidden_id' name='hidden_id' value='${key}'>`);
+        $('#hidden_id').val(key).readonly;
         $('#detailMnik').prop('readonly', true);
         $('#detailMnik').val(result.data.nik).readonly;
         if (result.data.overtimeType == 0) {
@@ -211,7 +212,7 @@ $("#btnApprovedManager").click(function (e) {
                     'success'
                 )
                 table_manager.ajax.reload();
-                $('.detailModalFinance').modal('hide');
+                $('.detailModalManager').modal('hide');
 
             }).fail((error) => {
                 console.log(error);
@@ -259,7 +260,7 @@ $("#btnRejectedManager").click(function (e) {
                     'success'
                 )
                 table_manager.ajax.reload();
-                $('.detailModal').modal('hide');
+                $('.detailModalManager').modal('hide');
 
             }).fail((error) => {
                 console.log(error);
