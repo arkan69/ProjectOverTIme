@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    table = $("#table_manager").DataTable({
+﻿//$(document).ready(function () {
+    table_manager = $("#table_manager").DataTable({
         ajax: {
             "url": "../Employee/SplkEmployee",
             "dataType": "Json",
@@ -84,7 +84,7 @@
                 "render": function (data, type, row) {
                     var getNik = row['id'];
                     return `<div class="btn-group d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalFinance">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -120,7 +120,7 @@
             }
         ]
     });
-});
+//});
 
 
 
@@ -210,8 +210,8 @@ $("#btnApprovedManager").click(function (e) {
                     'SPLK Employee Berhasil diApproved',
                     'success'
                 )
-                table.ajax.reload();
-                $('.detailModalManager').modal('hide');
+                table_manager.ajax.reload();
+                $('.detailModalFinance').modal('hide');
 
             }).fail((error) => {
                 console.log(error);
@@ -258,7 +258,7 @@ $("#btnRejectedManager").click(function (e) {
                     'SPLK Employee Berhasil diRejected',
                     'success'
                 )
-                table.ajax.reload();
+                table_manager.ajax.reload();
                 $('.detailModal').modal('hide');
 
             }).fail((error) => {

@@ -103,21 +103,21 @@ namespace API.Controllers
             }
         }
 
-        //[HttpGet("EmployeeCount")]
-        //public ActionResult GetEmployeeCount()
-        //{
-        //    try
-        //    {
-        //        var get = _repositories.TotalemployeeSPLK();
-        //        return get == null
-        //            ? NotFound(new { message = "Data Tidak Ada" })
-        //            : (ActionResult)Ok(_repositories.TotalemployeeSPLK);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e);
-        //    }
-        //}
+        [HttpGet("EmployeeCount")]
+        public ActionResult GetEmployeeCount(string email)
+        {
+            try
+            {
+                var get = _repositories.TotalemployeeSPLK(email);
+                return get == null
+                    ? NotFound(new { message = "Data Tidak Ada" })
+                    : Ok(get);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
 
         [HttpPost("TestUpdate")]
         public ActionResult UpdateForm(SplkUpdateVM update)

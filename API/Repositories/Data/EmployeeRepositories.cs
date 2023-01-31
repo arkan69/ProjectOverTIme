@@ -127,12 +127,21 @@ namespace API.Repositories.Data
             return result;
         }
 
-        //public ChartVM TotalemployeeSPLK()
-        //{
-        //    string[] getLabels = context.Universities.Select(u => u.Name).OrderBy(u => u).ToArray();
-        //    int[] getSeries = _context.Splk.Select(u => u.NIK.Count).OrderBy(u => u).ToArray();
+        public IEnumerable TotalemployeeSPLK(string email)
+        {
+            //string[] getLabels = context.Universities.Select(u => u.Name).OrderBy(u => u).ToArray();
+            var result = _context.Accounts
+                .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
+                (a, e) => new { a, e })
+                .Join(_context.Splk, ae => ae.e.NIK, s => s.NIK,
+                (ae, s) => new
+                {
+                   
+                    nik = s.NIK,
+                     ae.a.Email
+                }).Where(ea => ea.Email == email).Distinct().ToList();
 
-        //    return new ChartVM(getSeries);
-        //}
-}
+            return result;
+        }
+    }
 }

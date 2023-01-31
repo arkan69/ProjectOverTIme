@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    table = $("#table_finance").DataTable({
+﻿//$(document).ready(function () {
+    table_finance = $("#table_finance").DataTable({
         ajax: {
             "url": "../Employee/SplkFinance",
             "dataType": "Json",
@@ -129,7 +129,7 @@
             }
         ]
     });
-});
+//});
 
 
 
@@ -213,7 +213,7 @@ $("#btnDoneFinance").click(function (e) {
                     'SPLK Employee Berhasil diApproved',
                     'success'
                 )
-                table.ajax.reload();
+                table_finance.ajax.reload();
                 $('.detailModalManager').modal('hide');
 
             }).fail((error) => {

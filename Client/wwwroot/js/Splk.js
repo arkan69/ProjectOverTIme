@@ -1,5 +1,5 @@
-﻿$(document).ready(function () {
-    table = $("#table_splk").DataTable({
+﻿//$(document).ready(function () {
+    var table_splk = $("#table_splk").DataTable({
         ajax: {
             "url": "../Employee/GetMasterEmployee",
             "dataType": "Json",
@@ -128,7 +128,7 @@
             }
         ]
     });
-});
+//});
 
 //Validate Jquery Plugin
 //Ver 0
@@ -191,14 +191,14 @@ $(document).ready(function () {
 
 // Action Function Insert & Update
 $("#btnSaveSplk").click(function (e) {
-    //e.preventDefault();
-    //if ($("#formSplk").valid()) {
+    e.preventDefault();
+    if ($("#formSplk").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
             console.log("INI INSERT");
             InsertSplkForm();
         }
-   // }
+    }
 });
 
 // Clear Modal Insert Employee
@@ -222,17 +222,17 @@ function InsertSplk() {
 
 };
 
-function GetSPLKEmployee() {
-    $.ajax({
-        url: '../Employee/GetMasterEmployee'
-    }).done((result) => {
-        console.log(result);
-        return result;
-    })
-}
+//function GetSPLKEmployee() {
+//    $.ajax({
+//        url: '../Employee/GetMasterEmployee'
+//    }).done((result) => {
+//        console.log(result);
+//        return result;
+//    })
+//}
 
-const data = GetSPLKEmployee();
-console.log("data baru", data);
+//const data = GetSPLKEmployee();
+//console.log("data baru", data);
 
 //INSERT NEW 1
 function InsertSplkForm() {
@@ -272,8 +272,8 @@ function InsertSplkForm() {
                 "Data Berhasil ditambahkan",
                 'success'
             )
-            table.ajax.reload();
-            $('.insertModal').modal('hide');
+            $('.insertModalSplk').modal('hide');
+            table_splk.ajax.reload();
         })
     }
 }
@@ -368,7 +368,7 @@ const DeleteSpkl = (key) => {
                         'Employee has been deleted.',
                         'success'
                     )
-                    $('#table_splk').DataTable().ajax.reload()
+                    table_splk.ajax.reload()
                 },
                 error: () => {
                     Swal.fire(
