@@ -32,27 +32,37 @@
         $("#TotRejected").append(`<div class="h5 mb-0 font-weight-bold text-gray-800">${TotRejected}</div>`);
     })
 });
-//
-var options = {
-    series: [44, 55],
-    chart: {
-        type: 'donut',
-    },
-    responsive: [{
-        breakpoint: 480,
-        options: {
-            chart: {
-                width: 200
-            },
-            legend: {
-                position: 'bottom'
+// Chart berdasarkan employee ambil pengajuan dan tidak ambil yg dibawahi manager masing2
+$.ajax({
+    type: "GET",
+    url: "../Employee/GetCountEmployee"
+}).done((result) => {
+    $("#TotEmployee").append(`<div class="h5 mb-0 font-weight-bold text-gray-800">${result[1]}</div>`);
+    var options = {
+        series: [result[0], result[1] - result[0]],
+        chart: {
+            width: 480,
+            type: 'pie',
+        },
+        labels: ['Employee Ambil Lembur', 'Employee Tidak Ambil Lembur'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
             }
-        }
-    }]
-};
+        }]
+    };
 
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+
+})
+
 
 //CHART PIE SIMPLE Jam pengajuan ambil + Sisa jam ambil
 
