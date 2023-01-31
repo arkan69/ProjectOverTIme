@@ -65,12 +65,10 @@
                 "render": function (data, type, row) {
                     var getNik = row['nik'];
                     return `<div class="btn-group">
-                                    <button type="button" class="btn  btn-warning" data-bs-toggle="modal" onclick="updateEmployee('${getNik}')" data-bs-target="#insertModal">
-                                        Edit
+                                    <button type="button" class="btn btn-warning fas fa-edit" data-bs-toggle="modal" onclick="updateEmployee('${getNik}')" data-bs-target="#insertModal" title="Detail">
                                     </button>
                                     &nbsp;
-                                    <button type="button" class="btn  btn-danger" onclick="Delete('${getNik}')" ">
-                                       Delete
+                                    <button type="button" class="btn btn-danger fas fa-trash" onclick="Delete('${getNik}')" title="Delete"">
                                     </button>
                                 </div>
                             `;
@@ -84,21 +82,27 @@
 
             {
                 extend: 'excelHtml5',
-                className: 'btn btn-success mb-3',
+                text: '',
+                titleAttr: 'Excel',
+                className: 'btn btn-success mb-3 fa-solid fa-file-excel p-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'csvHtml5',
-                className: 'btn btn-warning mb-3',
+                text: '',
+                titleAttr: 'Csv',
+                className: 'btn btn-warning mb-3 fa-solid fa-file-csv p-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
             },
             {
                 extend: 'pdfHtml5',
-                className: 'btn btn-info mb-3',
+                text: '',
+                titleAttr: 'Pdf',
+                className: 'btn btn-danger mb-3 fa-solid fa-file-pdf p-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 }
@@ -110,7 +114,7 @@
 
 // Action Function Insert & Update
 $("#btnSaveEmployee").click(function (e) {
-    e.preventDefault();
+    //e.preventDefault();
     //if ($("#form").valid()) {
         var data_action = $(this).attr("data-name");
         if (data_action == "insert") {
@@ -177,4 +181,3 @@ function formatRupiah(angka) {
     const rupiah = 'Rp ' + convert.join('.').split('').reverse().join('')
     return rupiah;
 }
-

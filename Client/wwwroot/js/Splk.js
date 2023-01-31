@@ -84,15 +84,11 @@
                 "render": function (data, type, row) {
                     var getNik = row['id'];
                     return `<div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-circle btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal" title="Detail">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                     &nbsp;
-                                    <button type="button" class="btn btn-sm btn-circle btn-warning" data-bs-toggle="modal" onclick="updateSplk('${getNik}')" data-bs-target="#updateModal">
-                                        <span class="fas fa-edit"></span>
-                                    </button>
-                                    &nbsp;
-                                    <button type="button" class="btn btn-sm btn-circle btn-danger" onclick="DeleteSpkl('${getNik}')" ">
+                                    <button type="button" class="btn btn-danger" onclick="DeleteSpkl('${getNik}')" title="Delete"">
                                         <span class="fas fa-trash"></span>
                                     </button>
                                 </div>
@@ -158,22 +154,22 @@ $(document).ready(function () {
 
         messages: {
             jenislembur: {
-                required: "<div style='font-size:15px; '>Jenis Lembur is required.</div>"
+                required: "<div style='font-size:15px; '>Overtime Type is required.</div>"
             },
             tglmulai: {
-                required: "<div style='font-size:15px; '>Tanggal is required.</div>"
+                required: "<div style='font-size:15px; '>Date is required.</div>"
             },
             jammulai: {
-                required: "<div style='font-size:15px; '>Jam Mulai is required.</div>"
+                required: "<div style='font-size:15px; '>Start Time is required.</div>"
             },
             jamselesai: {
-                required: "<div style='font-size:15px; '>Jam Selesai is required.</div>"
+                required: "<div style='font-size:15px; '>End Time is required.</div>"
             },
             deskripsi: {
-                required: "<div style='font-size:15px; '>Deskripsi is required.</div>"
+                required: "<div style='font-size:15px; '>Description is required.</div>"
             },
             buktifile: {
-                required: "<p style='font-size:15px; width:100%'>Bukti File is required.</p>"
+                required: "<p style='font-size:15px; width:100%'>Evidence is required.</p>"
             }
         },
         highlight: function (element) {

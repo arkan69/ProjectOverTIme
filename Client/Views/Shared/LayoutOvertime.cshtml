@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title></title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
@@ -84,7 +84,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Custom Components:</h6>
                         <a class="collapse-item" asp-controller="LandingPage" asp-action="Index">Landing Page</a>
-                        <a class="collapse-item" asp-controller="Chart" asp-action="Index">Chart Employee for Manager or Employee ?</a>
                         <a class="collapse-item" asp-controller="Login" asp-action="Index">Login</a>
                     </div>
                 </div>
@@ -95,7 +94,7 @@
 
             <!-- Nav Item - Tables Admin -->
             <li class="nav-item">
-                <a class="nav-link" asp-controller="Employee" asp-action="Index">
+                <a class="nav-link" onclick="test()" asp-controller="Employee" asp-action="Index">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Admin</span>
                 </a>
@@ -150,6 +149,7 @@
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
