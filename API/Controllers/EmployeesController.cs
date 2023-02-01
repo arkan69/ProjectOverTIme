@@ -119,6 +119,38 @@ namespace API.Controllers
             }
         }
 
+        [HttpGet("ListNikChart")]
+        public ActionResult ListNikChart(string email)
+        {
+            try
+            {
+                var get = _repositories.ListNikChart(email);
+                return get == null
+                    ? NotFound(new { message = "Data Tidak Ada" })
+                    : Ok(get);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet("GetName")]
+        public ActionResult GetName(string email)
+        {
+            try
+            {
+                var get = _repositories.GetName(email);
+                return get == null
+                    ? NotFound(new { message = "Data Tidak Ada" })
+                    : Ok(get);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
         [HttpPost("TestUpdate")]
         public ActionResult UpdateForm(SplkUpdateVM update)
         {

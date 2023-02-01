@@ -58,6 +58,22 @@ namespace Client.Controllers
             return Json(result);
         }
 
+        [HttpGet]
+        public async Task<JsonResult> GetName()
+        {
+            var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = await repository.GetName(email);
+            return Json(result);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> ListNikChart()
+        {
+            var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
+            var result = await repository.ListNikChart(email);
+            return Json(result);
+        }
+
         [HttpPost]
         public JsonResult UpdateSplk([FromForm] SplkUpdateVM entity)
         {

@@ -96,7 +96,29 @@ namespace Client.Repositories.Data
             }
         }
 
-        public HttpStatusCode UpdateSplk(SplkUpdateVM entity)
+        public async Task<List<string>> GetName(string email)
+        {
+            using (var response = await httpClient.GetAsync(address.link + request + "GetName?email=" + email))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                List<string> entities = JsonConvert.DeserializeObject<List<string>>(apiResponse);
+                return entities;
+            }
+        }
+
+        public async Task<List<ChartListVM>> ListNikChart(string email)
+        {
+            List<ChartListVM> entities = new List<ChartListVM>();
+
+            using (var response = await httpClient.GetAsync(address.link + request + "ListNikChart?email=" + email))
+            {
+                string apiResponse = await response.Content.ReadAsStringAsync();
+                entities = JsonConvert.DeserializeObject<List<ChartListVM>>(apiResponse);
+            }
+            return entities;
+
+        }
+            public HttpStatusCode UpdateSplk(SplkUpdateVM entity)
         {
             StringContent content = new StringContent(JsonConvert.SerializeObject(entity), Encoding.UTF8, "application/json");
             var result = httpClient.PostAsync(address.link + request + "TestUpdate", content).Result;

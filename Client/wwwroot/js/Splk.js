@@ -83,12 +83,15 @@
                 "data": null,
                 "render": function (data, type, row) {
                     var getNik = row['id'];
+                    if (row['status'] != 0) {
+                        var Status = 'Disabled';
+                    }
                     return `<div class="btn-group">
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal" title="Detail">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                     &nbsp;
-                                    <button type="button" class="btn btn-danger" onclick="DeleteSpkl('${getNik}')" title="Delete"">
+                                    <button type="button" class="btn btn-danger" onclick="DeleteSpkl('${getNik}')" ${Status}>
                                         <span class="fas fa-trash"></span>
                                     </button>
                                 </div>
@@ -218,65 +221,70 @@ function InsertSplk() {
 
 };
 
-//function GetSPLKEmployee() {
-//    $.ajax({
-//        url: '../Employee/GetMasterEmployee'
-//    }).done((result) => {
-//        console.log(result);
-//        return result;
-//    })
-//}
-
-//const data = GetSPLKEmployee();
-//console.log("data baru", data);
 
 //INSERT NEW 1
 function InsertSplkForm() {
-    let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
-    let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
-    let today = new Date();
 
-    //Hitung selisih Jam
-    let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
-    let durationMinutes = duration / (1000 * 60);
-    let hours = Math.floor(durationMinutes / 60);
+    let totJam = 0;
+    $.ajax({
+        url: "../Employee/GetMasterEmployee"
+    }).done((result) => {
+        for (const data of result) {
+            if (data.status == 2 || data.status == 3) {
+                totJam += data.jmlJam;
+            }
+        }
+        let Start = $("#tglmulai").val() + 'T' + $("#jammulai").val();
+        let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
+        let today = new Date();
 
-    var fd = new FormData();
-    fd.append('nik', $("#nik").val())
-    fd.append('overtimeType', $('#jenislembur').val());
-    fd.append('StartDate', Start);
-    fd.append('EndDate', End);
-    fd.append('description', $("#deskripsi").val());
-    fd.append('JmlJam', hours);
-    fd.append('file', $('#buktifile')[0].files[0]);
+        //Hitung selisih Jam
+        let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
+        let durationMinutes = duration / (1000 * 60);
+        let hours = Math.floor(durationMinutes / 60);
 
-    console.log("cek", $('#jenislembur').val());
-    if ((new Date(Start)).getTime() > today.getTime()) {
-        alert("Tanggal tidak boleh melebihi hari ini!");
-    }
-    else if (($('#jenislembur').val() == 0) && (hours < 1 || hours > 4)) {
-        alert("Pengambilan lembur Kerja min 1 jam atau max 4 jam!");
-    }
-    else if (($('#jenislembur').val() == 1) && (hours < 1 || hours > 10)) {
-        alert("Pengambilan lembur Libur min 1 jam atau max 10 jam!");
-    } else {
-        console.log("tembus");
-        $.ajax({
-            url: "../Splk/SplkForm",
-            type: "POST",
-            data: fd,
-            processData: false,
-            contentType: false,
-        }).done((result) => {
-            Swal.fire(
-                'Success',
-                "Data Berhasil ditambahkan",
-                'success'
-            )
-            $('.insertModalSplk').modal('hide');
-            table_splk.ajax.reload();
-        })
-    }
+        var fd = new FormData();
+        fd.append('nik', $("#nik").val())
+        fd.append('overtimeType', $('#jenislembur').val());
+        fd.append('StartDate', Start);
+        fd.append('EndDate', End);
+        fd.append('description', $("#deskripsi").val());
+        fd.append('JmlJam', hours);
+        fd.append('file', $('#buktifile')[0].files[0]);
+
+        
+        if ((new Date(Start)).getTime() > today.getTime()) {
+            alert("Tanggal tidak boleh melebihi hari ini!");
+        }
+        else if (($('#jenislembur').val() == 0) && (hours < 1 || hours > 4)) {
+            alert("Pengambilan lembur Kerja min 1 jam atau max 4 jam!");
+        }
+        else if (($('#jenislembur').val() == 1) && (hours < 1 || hours > 12)) {
+            alert("Pengambilan lembur Libur min 1 jam atau max 12 jam!");
+        }
+        else if (totJam > 46) {
+            alert("Pemgambilan Lembur tidak boleh lebih dari 46 jam dalam 1 bulan!");
+        } else {
+            console.log("tembus",totJam);
+            $.ajax({
+                url: "../Splk/SplkForm",
+                type: "POST",
+                data: fd,
+                processData: false,
+                contentType: false,
+            }).done((result) => {
+                Swal.fire(
+                    'Success',
+                    "Data Berhasil ditambahkan",
+                    'success'
+                )
+                $('.insertModalSplk').modal('hide');
+                table_splk.ajax.reload();
+            })
+        }        
+
+    })
+    
 }
 
 //UPDATE
@@ -338,15 +346,20 @@ function Waktu(waktu) {
 }
 
 var downloadButton = document.getElementById("download-pdf-employ");
-downloadButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    var image = document.getElementById("imgElem");
-    var base64string = image.src;
-    var link = document.createElement("a");
-    link.download = "filebukti.pdf";
-    link.href = base64string;
-    link.click();
-});
+if (downloadButton) {
+    downloadButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        var image = document.getElementById("imgElem");
+        var base64string = image.src;
+        var link = document.createElement("a");
+        link.download = "filebukti.pdf";
+        link.href = base64string;
+        link.click();
+    })
+} else {
+    console.error('Elemen tidak ditemukan');
+}
+;
 
 //Detele data
 const DeleteSpkl = (key) => {
@@ -382,3 +395,12 @@ const DeleteSpkl = (key) => {
         }
     })
 }
+
+
+
+//$.ajax({
+//    url: "../Employee/GetName"
+//}).done((result) => {
+    
+//    console.log(result);
+//})

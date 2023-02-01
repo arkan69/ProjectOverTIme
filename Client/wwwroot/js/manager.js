@@ -274,13 +274,19 @@ $("#btnRejectedManager").click(function (e) {
     })
 });
 
+
 var downloadButton = document.getElementById("download-pdf-manager");
-downloadButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    var image = document.getElementById("imgElemM");
-    var base64string = image.src;
-    var link = document.createElement("a");
-    link.download = "filebukti.pdf";
-    link.href = base64string;
-    link.click();
-});
+if (downloadButton) {
+    downloadButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        var image = document.getElementById("imgElemM");
+        var base64string = image.src;
+        var link = document.createElement("a");
+        link.download = "filebukti.pdf";
+        link.href = base64string;
+        link.click();
+    });
+} else {
+    console.error('Elemen tidak ditemukan');
+}
+

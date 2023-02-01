@@ -42,6 +42,18 @@ namespace API.Repositories.Data
                 }).Where(ea => ea.Email == email);
         }
 
+        public IEnumerable GetName(string email)
+        {
+            return _context.Accounts
+                .Join(_context.Employees, a => a.NIK, e => e.NIK,
+                (a, e) => new { 
+
+                    FullName = (e.FirstName + " " + e.LastName),
+                    nik = e.NIK,
+                    Email = a.Email
+                }).Where(ea => ea.Email == email);
+        }
+
         public IEnumerable SplkEmployee(string email)
         {
             return _context.Accounts
@@ -81,11 +93,19 @@ namespace API.Repositories.Data
                 {
                     if (record.JmlJam == 1)
                     {
-                        record.UpahLembur = record.JmlJam * 1.5 * 0.005780347 * record1.Salary;
+                        record.UpahLembur =  1.5 * 0.005780347 * record1.Salary;
+                    } 
+                    else if (record.JmlJam == 2)
+                    {
+                        record.UpahLembur = 3.5 * 0.005780347 * record1.Salary;
+                    }
+                    else if (record.JmlJam == 3)
+                    {
+                        record.UpahLembur = 5 * 0.005780347 * record1.Salary;
                     }
                     else
                     {
-                        record.UpahLembur = record.JmlJam * 2 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 7.5 * 0.005780347 * record1.Salary;
                     }
                 }
                 else if (record.OvertimeType != 0)
@@ -123,13 +143,13 @@ namespace API.Repositories.Data
         public List<SPLK> GetChart(string NIK)
         {
             var currentMonth = DateTime.Now.Month;
-            var result = _context.Splk.Where(x => x.NIK == NIK && x.StartDate.Month == currentMonth && x.Status == Status.Approved).ToList();
+            var result = _context.Splk.Where(x => x.NIK == NIK && x.StartDate.Month == currentMonth && x.Status != Status.Pending).ToList();
             return result;
         }
 
         public List<int> TotalemployeeSPLK(string email)
         {
-            //string[] getLabels = context.Universities.Select(u => u.Name).OrderBy(u => u).ToArray();
+            
             var res_splk = _context.Accounts
                 .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
                 (a, e) => new { a, e })
@@ -149,6 +169,24 @@ namespace API.Repositories.Data
                 }).Where(ea => ea.Email == email).Distinct().ToList().Count();
             List<int> arr = new List<int> { res_splk, res_employ };
             return arr;
+        }
+
+        public IEnumerable ListNikChart(string email)
+        {
+            
+            var result = _context.Accounts
+                .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
+                (a, e) => new { a, e })
+                .Join(_context.Splk, ae => ae.e.NIK, s => s.NIK,
+                (ae, s) => new
+                {
+
+                    nik = s.NIK,
+                    ae.a.Email
+                }).Where(ea => ea.Email == email).Distinct().ToList();
+
+           
+            return result;
         }
     }
 }
