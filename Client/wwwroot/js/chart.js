@@ -150,7 +150,7 @@ document.getElementById("nikemployee").onchange = function () {
                 width: 380,
                 type: 'pie',    
             },
-            labels: ['Takes', 'Remains'],
+            labels: ['Taken', 'Remaining'],
             responsive: [{
                 breakpoint: 480,
                 options: {
