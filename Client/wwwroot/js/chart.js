@@ -34,7 +34,7 @@ $.ajax({
             width: 480,
             type: 'pie',
         },
-        labels: ['Employee Ambil Lembur', 'Employee Tidak Ambil Lembur'],
+        labels: ['Employees take overtime', 'Employees don\'t take overtime'],
         responsive: [{
             breakpoint: 480,
             options: {
