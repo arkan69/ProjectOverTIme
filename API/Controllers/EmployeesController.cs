@@ -88,11 +88,11 @@ namespace API.Controllers
         }
 
         [HttpGet("GetChart")]
-        public ActionResult GetChart(string NIK)
+        public ActionResult GetChart(string NIK, DateTime start, DateTime end)
         {
             try
             {
-                var result = _repositories.GetChart(NIK);
+                var result = _repositories.GetChart(NIK,start,end);
                 return result == null
                     ? Ok(new { statusCode = 200, message = "Data Not Found!" })
                     : Ok(result);

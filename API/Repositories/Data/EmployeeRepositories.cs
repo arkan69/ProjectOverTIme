@@ -140,33 +140,64 @@ namespace API.Repositories.Data
             return account;
         }
 
-        public List<SPLK> GetChart(string NIK)
+        public List<SPLK> GetChart(string NIK, DateTime start, DateTime end)
         {
-            var currentMonth = DateTime.Now.Month;
-            var result = _context.Splk.Where(x => x.NIK == NIK && x.StartDate.Month == currentMonth && x.Status != Status.Pending).ToList();
+            //var currentMonth = DateTime.Now;
+            var result = _context.Splk
+                            .Where(x => x.NIK == NIK && x.StartDate >= start && x.StartDate <= end && (x.Status == Status.Approved || x.Status == Status.Done))
+                            .ToList();
             return result;
         }
 
+        //public List<int> TotalemployeeSPLK(string email)
+        //{
+
+        //    var res_splk = _context.Accounts
+        //        .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
+        //        (a, e) => new { a, e })
+        //        .Join(_context.Splk, ae => ae.e.NIK, s => s.NIK,
+        //        (ae, s) => new
+        //        {
+
+        //            nik = s.NIK,
+        //            ae.a.Email
+        //        }).Where(ea => ea.Email == email).Distinct().ToList().Count();
+
+        //    var res_employ = _context.Accounts
+        //        .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
+        //        (a, e) => new { 
+        //            nik = e.NIK,
+        //            a.Email
+        //        }).Where(ea => ea.Email == email).Distinct().ToList().Count();
+        //    List<int> arr = new List<int> { res_splk, res_employ };
+        //    return arr;
+        //}
+
         public List<int> TotalemployeeSPLK(string email)
         {
-            
             var res_splk = _context.Accounts
                 .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
                 (a, e) => new { a, e })
                 .Join(_context.Splk, ae => ae.e.NIK, s => s.NIK,
                 (ae, s) => new
                 {
-
                     nik = s.NIK,
                     ae.a.Email
-                }).Where(ea => ea.Email == email).Distinct().ToList().Count();
+                })
+                .Where(ea => ea.Email == email)
+                .GroupBy(x => x.nik)
+                .Count();
 
             var res_employ = _context.Accounts
                 .Join(_context.Employees, a => a.NIK, e => e.ManagerId,
-                (a, e) => new { 
+                (a, e) => new {
                     nik = e.NIK,
                     a.Email
-                }).Where(ea => ea.Email == email).Distinct().ToList().Count();
+                })
+                .Where(ea => ea.Email == email)
+                .GroupBy(x => x.nik)
+                .Count();
+
             List<int> arr = new List<int> { res_splk, res_employ };
             return arr;
         }

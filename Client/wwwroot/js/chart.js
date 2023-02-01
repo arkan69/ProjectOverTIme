@@ -56,15 +56,20 @@ $.ajax({
 
 //CHART PIE SIMPLE Jam pengajuan ambil + Sisa jam ambil
 
-
-document.getElementById("nikemployee").addEventListener("change", function () {
+const elements = document.querySelectorAll('.myClassChart');
+elements.forEach(element => {
+element.addEventListener("change", function () {
     const selectedValue = this.value;
-    console.log(selectedValue);
-    let remaining = 46;
-    let taken = 0;
+    var nik_chart = $('#nikemployee').val();
+    var date1_chart = $('#date1').val();
+    var date2_chart = $('#date2').val();
+    if (nik_chart && date1_chart && date2_chart) {
+        console.log("tidak ada yang kosong");
+        let remaining = 46;
+        let taken = 0;
     $.ajax({
         type: "GET",
-        url: `https://localhost:7092/api/Employees/GetChart?NIK=${selectedValue}`
+        url: `https://localhost:7092/api/Employees/GetChart?NIK=${nik_chart}&start=${date1_chart}&end=${date2_chart}`
     }).done((result) => {
         for (const data of result) {
             taken += data.jmlJam;
@@ -93,22 +98,78 @@ document.getElementById("nikemployee").addEventListener("change", function () {
             ]
         };
 
-        const chart = new ApexCharts(
+        if (window.chart && window.chart.destroy) {
+            window.chart.destroy();
+        }
+
+        window.chart = new ApexCharts(
             document.querySelector("#chartPie"),
             options
         );
-        chart.render();
+        window.chart.render();
     });
-});    
+    }
+    
+});
+});
+
+
+
+//document.getElementById("nikemployee").addEventListener("change", function () {
+//    const selectedValue = this.value;
+//    console.log(selectedValue);
+//    let remaining = 46;
+//    let taken = 0;
+//    $.ajax({
+//        type: "GET",
+//        url: `https://localhost:7092/api/Employees/GetChart?NIK=${selectedValue}`
+//    }).done((result) => {
+//        for (const data of result) {
+//            taken += data.jmlJam;
+//        }
+//        remaining -= taken;
+
+//        const options = {
+//            series: [taken, remaining],
+//            chart: {
+//                width: 380,
+//                type: "pie"
+//            },
+//            labels: ["Taken", "Remaining"],
+//            responsive: [
+//                {
+//                    breakpoint: 480,
+//                    options: {
+//                        chart: {
+//                            width: 200
+//                        },
+//                        legend: {
+//                            position: "bottom"
+//                        }
+//                    }
+//                }
+//            ]
+//        };
+
+//        const chart = new ApexCharts(
+//            document.querySelector("#chartPie"),
+//            options
+//        );
+//        chart.render();
+//    });
+//});    
 
 
 //List NIK
 $.ajax({
     url: '../Employee/ListNikChart'
 }).done((result) => {
-    //console.log("coba",result);
-
-
+    for (let i = 0; i < result.length; i++) {
+        $('#nikemployee').append($('<option>', {
+            value: result[i].nik,
+            text: result[i].nik
+        }));
+    }
 })
 
 

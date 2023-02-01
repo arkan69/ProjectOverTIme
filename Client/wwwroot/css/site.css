@@ -40,3 +40,10 @@ img {
     color: #171717;
     font-weight: bold;
 }
+
+.form-inline-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
