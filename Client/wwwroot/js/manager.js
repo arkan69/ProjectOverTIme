@@ -184,7 +184,7 @@ function detailmanager(key) {
 $("#btnApprovedManager").click(function (e) {
     Swal.fire({
         title: 'Sure to Approved this request?',
-        text: "Surat Pengajuan akan di Setujui.",
+        text: "Request form will be approved.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

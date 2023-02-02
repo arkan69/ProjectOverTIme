@@ -168,7 +168,7 @@ function Insert() {
         console.log(result);
         Swal.fire(
             'Success',
-            "Data Berhasil ditambahkan",
+            "Data added successfully",
             'success'
         )
     })

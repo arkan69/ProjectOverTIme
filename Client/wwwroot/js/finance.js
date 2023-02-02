@@ -195,7 +195,7 @@ $("#btnDoneFinance").click(function (e) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes Finalized!',
+        confirmButtonText: 'Finalized!',
         cancelButtonText: 'Cancel Finalized'
 
     }).then((result) => {
