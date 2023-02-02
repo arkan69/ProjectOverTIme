@@ -30,13 +30,13 @@
 </body>
 
 <script>
-    let timer = 5
+    let timer = 3
     setInterval(() => {
         document.getElementById('countdown').innerHTML = timer;
         timer--;
 
         if (timer === 0) {
-            location.href = "/login";
+            location.href = "/home";
         }
     }, 1000)
 </script>
