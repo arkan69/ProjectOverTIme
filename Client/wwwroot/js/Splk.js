@@ -263,7 +263,9 @@ function InsertSplkForm() {
                 break;
             }
         }
-
+        console.log("testing", year, ":", ValidateYear.getFullYear(), ":", month, ":", ValidateYear.getMonth());
+        console.log("testing2", year >= ValidateYear.getFullYear());
+        console.log("testing3", month <= ValidateYear.getMonth());
         var fd = new FormData();
         fd.append('nik', $("#nik").val())
         fd.append('overtimeType', $('#jenislembur').val());
@@ -284,9 +286,9 @@ function InsertSplkForm() {
         }
         else if (totJam > 46) {
             alert("Pemgambilan Lembur tidak boleh lebih dari 46 jam dalam 1 bulan!");
-        } 
-        else if (year > ValidateYear.getFullYear() && month > ValidateYear.getMonth()) {
-            alert("Pemgambilan Lembur hanya bisa dilakukan pada bulan ini!");
+        }
+        else if (ValidateYear.getFullYear() !== year || ValidateYear.getMonth()  !== month ) {
+            alert("Pemgambilan Lembur hanya bisa dilakukan pada bulan dan tahun ini!");
         }
         else if (flag) {
             alert("Pemgambilan Lembur tidak bisa dilakukan pada tanggal yang sama!");
@@ -306,11 +308,11 @@ function InsertSplkForm() {
                 $('.insertModalSplk').modal('hide');
                 table_splk.ajax.reload();
             })
-        }        
+        }
 
-    })
+    });
     
-}
+};
 
 //UPDATE
 function detailSplk(key) {
