@@ -203,7 +203,7 @@ $("#btnDoneFinance").click(function (e) {
             // Object
             var fd = new FormData();
             fd.append('id', $("#hidden_id_finance").val());
-            fd.append('nik', $("#detailMnik").val());
+            fd.append('nik', $("#detailFnik").val());
             fd.append('status', 3);
             $.ajax({
                 type: "POST",
