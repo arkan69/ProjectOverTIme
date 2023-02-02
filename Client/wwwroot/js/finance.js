@@ -19,9 +19,9 @@
                 "data": null,
                 render: function (data, type, row, meta) {
                     if (row['overtimeType'] == 0) {
-                        return "Kerja"
+                        return "Weekdays"
                     } else {
-                        return "Libur"
+                        return "Weekends/Holiday"
                     }
                 }
             },
@@ -189,14 +189,14 @@ function detailfinance(key) {
 // Action Function Approved
 $("#btnDoneFinance").click(function (e) {
     Swal.fire({
-        title: 'Yakin ingin diApproved?',
-        text: "Surat Pengajuan akan di Setujui.",
+        title: 'Sure about to finalize this request?',
+        text: "Request form will be finalized.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya Approved!',
-        cancelButtonText: 'Batal Approved'
+        confirmButtonText: 'Yes Finalized!',
+        cancelButtonText: 'Cancel Finalized'
 
     }).then((result) => {
         if (result.isConfirmed) {
@@ -213,8 +213,8 @@ $("#btnDoneFinance").click(function (e) {
                 contentType: false,
             }).done((result) => {
                 Swal.fire(
-                    'Approved',
-                    'SPLK Employee Berhasil diApproved',
+                    'Finalized Success',
+                    'SPLK Employee are Finalized',
                     'success'
                 )
                 table_finance.ajax.reload();
@@ -245,5 +245,5 @@ if (downloadButton) {
         link.click();
     })
 } else {
-    console.error('Elemen tidak ditemukan');
+    console.error('Element Not Found');
 };

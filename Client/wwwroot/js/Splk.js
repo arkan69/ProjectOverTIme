@@ -19,9 +19,9 @@
                 "data": null,
                 render: function (data, type, row, meta) {
                     if (row['overtimeType'] == 0) {
-                        return "Kerja"
+                        return "Weekdays"
                     } else {
-                        return "Libur"
+                        return "Weekends/Holiday"
                     }
                 }
             },
