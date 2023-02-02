@@ -98,11 +98,6 @@
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Overtime Overview</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                    </div>
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
@@ -120,14 +115,23 @@
                                 </div>
                                 <!-- Card Body -->
                                 <div class="card-body">
+
                                         <div class="form-inline-chart">
-                                            <select id="nikemployee" name="nikemployee" class="form-control myClassChart">
-                                                <option >Pilih NIK</option>
-                                               
-                                            </select>
-                                            <input type="date" class="form-control myClassChart" id="date1">
-                                            <input type="date" class="form-control myClassChart" id="date2">
+                                            <div class="row g-3">
+                                                <div class="col-4">
+                                                    <select id="nikemployee" name="nikemployee" class="form-control myClassChart">
+                                                        <option >Pilih NIK</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="date" class="form-control myClassChart" id="date1">
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="date" class="form-control myClassChart" id="date2">
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div id="chartPie"></div>
                                     </div>
 
