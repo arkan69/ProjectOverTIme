@@ -26,7 +26,7 @@ namespace Client.Controllers
                 BaseAddress = new Uri(address.link)
             };
         }
-        //[Authorize(Roles = "Employee")]
+
         public IActionResult Index() 
         {
             var email = HttpContext.User.FindFirst(ClaimTypes.Email)?.Value;
