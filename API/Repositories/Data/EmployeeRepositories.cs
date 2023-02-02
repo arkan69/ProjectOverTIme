@@ -120,15 +120,15 @@ namespace API.Repositories.Data
                     }
                     else if (record.JmlJam == 10)
                     {
-                        record.UpahLembur = 21 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 23 * 0.005780347 * record1.Salary;
                     }
                     else if (record.JmlJam == 11)
                     {
-                        record.UpahLembur = 25 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 27 * 0.005780347 * record1.Salary;
                     }
                     else if (record.JmlJam == 12)
                     {
-                        record.UpahLembur = 29 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 31 * 0.005780347 * record1.Salary;
                     }
                 }
                 _context.SaveChanges();
