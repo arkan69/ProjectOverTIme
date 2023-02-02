@@ -92,11 +92,11 @@
                 "data": null,
                 "render": function (data, type, row) {
                     var getNik = row['id'];
-                    if (row['status'] == 3) {
-                        var Status = 'Disabled';
-                    }
+                    //if (row['status'] == 3) {
+                    //    var Status = 'Disabled';
+                    //}
                     return `<div class="btn-group d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalFinance" title="Detail" ${Status}>
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalFinance" title="Detail" >
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -138,14 +138,14 @@
 
 //UPDATE
 function detailfinance(key) {
+    $('#btnDoneFinance').attr('disabled', false);
     console.log(key);
     $.ajax({
         url: 'https://localhost:7092/api/Splks/' + key
     }).done((result) => {
         console.log(result);
-        if (result.data.status != 1) {
-            $('#btnApprovedManager').attr('disabled', true);
-            $('#btnRejectedManager').attr('disabled', true);
+        if (result.data.status == 3) {
+            $('#btnDoneFinance').attr('disabled', true);
         }
         //$("#detailFormFinance").append(`<input type='hidden' id='hidden_id_finance' name='hidden_id_finance' value='${key}'>`);
         $('#hidden_id_finance').val(key).readonly;
@@ -203,7 +203,7 @@ $("#btnDoneFinance").click(function (e) {
             // Object
             var fd = new FormData();
             fd.append('id', $("#hidden_id_finance").val());
-            fd.append('nik', $("#detailMnik").val());
+            fd.append('nik', $("#detailFnik").val());
             fd.append('status', 3);
             $.ajax({
                 type: "POST",
