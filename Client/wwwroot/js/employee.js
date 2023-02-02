@@ -53,9 +53,9 @@
                 "data": null,
                 render: function (data, type, row, meta) {
                     if (row['gender'] == 0) {
-                        return "Laki - Laki"
+                        return "Male"
                     } else {
-                        return "Perempuan"
+                        return "Female"
                     }
 
                 }

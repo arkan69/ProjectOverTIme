@@ -101,7 +101,7 @@ namespace API.Repositories.Data
                     }
                     else if (record.JmlJam == 3)
                     {
-                        record.UpahLembur = 5 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 5.5 * 0.005780347 * record1.Salary;
                     }
                     else
                     {
@@ -116,11 +116,19 @@ namespace API.Repositories.Data
                     }
                     else if (record.JmlJam == 9)
                     {
-                        record.UpahLembur = record.JmlJam * 3 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 19 * 0.005780347 * record1.Salary;
                     }
-                    else if (record.JmlJam <= 10)
+                    else if (record.JmlJam == 10)
                     {
-                        record.UpahLembur = record.JmlJam * 4 * 0.005780347 * record1.Salary;
+                        record.UpahLembur = 21 * 0.005780347 * record1.Salary;
+                    }
+                    else if (record.JmlJam == 11)
+                    {
+                        record.UpahLembur = 25 * 0.005780347 * record1.Salary;
+                    }
+                    else if (record.JmlJam == 12)
+                    {
+                        record.UpahLembur = 29 * 0.005780347 * record1.Salary;
                     }
                 }
                 _context.SaveChanges();

@@ -2,7 +2,9 @@
 using API.ViewModels;
 using Client.Base;
 using Client.Repositories.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Security.Claims;
 
 namespace Client.Controllers
@@ -14,6 +16,8 @@ namespace Client.Controllers
         {
             this.repository = repository;
         }
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();

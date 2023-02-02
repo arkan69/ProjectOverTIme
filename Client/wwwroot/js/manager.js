@@ -19,9 +19,9 @@
                 "data": null,
                 render: function (data, type, row, meta) {
                     if (row['overtimeType'] == 0) {
-                        return "Kerja"
+                        return "Weekdays"
                     } else {
-                        return "Libur"
+                        return "Weekends/Holiday"
                     }
                 }
             },
@@ -183,14 +183,14 @@ function detailmanager(key) {
 // Action Function Approved
 $("#btnApprovedManager").click(function (e) {
     Swal.fire({
-        title: 'Yakin ingin diApproved?',
+        title: 'Sure to Approved this request?',
         text: "Surat Pengajuan akan di Setujui.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya Approved!',
-        cancelButtonText: 'Batal Approved'
+        confirmButtonText: 'Approved!',
+        cancelButtonText: 'Cancel Approved'
 
     }).then((result) => {
         if (result.isConfirmed) {
@@ -208,7 +208,7 @@ $("#btnApprovedManager").click(function (e) {
             }).done((result) => {
                 Swal.fire(
                     'Approved',
-                    'SPLK Employee Berhasil diApproved',
+                    'SPLK Employee Approved',
                     'success'
                 )
                 table_manager.ajax.reload();
@@ -230,14 +230,14 @@ $("#btnApprovedManager").click(function (e) {
 $("#btnRejectedManager").click(function (e) {
     e.preventDefault();
     Swal.fire({
-        title: 'Yakin ingin diRejected?',
-        text: "Surat Pengajuan akan di Rejected.",
+        title: 'Sure want to Rejected this request?',
+        text: "Request form will be Rejected.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ya Rejected!',
-        cancelButtonText: 'Batal Rejected'
+        confirmButtonText: 'Reject!',
+        cancelButtonText: 'Cancel Rejected'
 
     }).then((result) => {
         if (result.isConfirmed) {
@@ -255,8 +255,8 @@ $("#btnRejectedManager").click(function (e) {
 
             }).done((result) => {
                 Swal.fire(
-                    'Approved',
-                    'SPLK Employee Berhasil diRejected',
+                    'Rejected',
+                    'SPLK Employee are Rejected',
                     'success'
                 )
                 table_manager.ajax.reload();
@@ -287,6 +287,6 @@ if (downloadButton) {
         link.click();
     });
 } else {
-    console.error('Elemen tidak ditemukan');
+    console.error('Element Not Found');
 }
 
