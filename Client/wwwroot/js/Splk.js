@@ -426,9 +426,10 @@ const DeleteSpkl = (key) => {
 
 
 
-//$.ajax({
-//    url: "../Employee/GetName"
-//}).done((result) => {
+$.ajax({
+    url: "../Employee/GetName"
+}).done((result) => {
     
-//    console.log(result);
-//})
+    console.log(result);
+    $("#nameaccount").append(`<span class='mr - 2 d - none d - lg - inline text - black - 600 small'>${result[0].fullName} </span>`);
+})

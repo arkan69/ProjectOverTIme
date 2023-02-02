@@ -96,14 +96,16 @@ namespace Client.Repositories.Data
             }
         }
 
-        public async Task<List<string>> GetName(string email)
+        public async Task<List<GetNameVM>> GetName(string email)
         {
+            List<GetNameVM> entities = new List<GetNameVM>();
             using (var response = await httpClient.GetAsync(address.link + request + "GetName?email=" + email))
             {
                 string apiResponse = await response.Content.ReadAsStringAsync();
-                List<string> entities = JsonConvert.DeserializeObject<List<string>>(apiResponse);
-                return entities;
+                entities = JsonConvert.DeserializeObject<List<GetNameVM>>(apiResponse);
+                
             }
+            return entities;
         }
 
         public async Task<List<ChartListVM>> ListNikChart(string email)
