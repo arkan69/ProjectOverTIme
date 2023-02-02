@@ -129,6 +129,12 @@
     });
 //});
 
+
+$('#table_splk').on('click', 'td', function () {
+    var colIndex = $(this).index();
+    console.log("Column index: ", colIndex);
+});
+
 //Validate Jquery Plugin
 //Ver 0
 $(document).ready(function () {
@@ -224,11 +230,12 @@ function InsertSplk() {
 
 //INSERT NEW 1
 function InsertSplkForm() {
-
     let totJam = 0;
+    let Data;
     $.ajax({
         url: "../Employee/GetMasterEmployee"
     }).done((result) => {
+        Data = result;
         for (const data of result) {
             if (data.status == 2 || data.status == 3) {
                 totJam += data.jmlJam;
@@ -238,10 +245,24 @@ function InsertSplkForm() {
         let End = $("#tglmulai").val() + 'T' + $("#jamselesai").val();
         let today = new Date();
 
+        const year = today.getFullYear();
+        const month = today.getMonth(); // returns the month (0-11)
+        const ValidateYear = new Date(Start);
+
         //Hitung selisih Jam
         let duration = (new Date(End)).getTime() - (new Date(Start)).getTime();
         let durationMinutes = duration / (1000 * 60);
         let hours = Math.floor(durationMinutes / 60);
+
+
+        //Data from API validate Tanggal yang sama.
+        let flag = false;
+        for (var i = 0; i < Data.length; i++) {
+            if (Tanggal(Data[i].startDate) == Tanggal(Start)) {
+                flag = true;
+                break;
+            }
+        }
 
         var fd = new FormData();
         fd.append('nik', $("#nik").val())
@@ -252,7 +273,6 @@ function InsertSplkForm() {
         fd.append('JmlJam', hours);
         fd.append('file', $('#buktifile')[0].files[0]);
 
-        
         if ((new Date(Start)).getTime() > today.getTime()) {
             alert("Tanggal tidak boleh melebihi hari ini!");
         }
@@ -264,8 +284,13 @@ function InsertSplkForm() {
         }
         else if (totJam > 46) {
             alert("Pemgambilan Lembur tidak boleh lebih dari 46 jam dalam 1 bulan!");
+        } 
+        else if (year > ValidateYear.getFullYear() && month > ValidateYear.getMonth()) {
+            alert("Pemgambilan Lembur hanya bisa dilakukan pada bulan ini!");
+        }
+        else if (flag) {
+            alert("Pemgambilan Lembur tidak bisa dilakukan pada tanggal yang sama!");
         } else {
-            console.log("tembus",totJam);
             $.ajax({
                 url: "../Splk/SplkForm",
                 type: "POST",
@@ -345,6 +370,8 @@ function Waktu(waktu) {
     return time_modified;
 }
 
+
+
 var downloadButton = document.getElementById("download-pdf-employ");
 if (downloadButton) {
     downloadButton.addEventListener("click", function (event) {
@@ -358,8 +385,7 @@ if (downloadButton) {
     })
 } else {
     console.error('Elemen tidak ditemukan');
-}
-;
+};
 
 //Detele data
 const DeleteSpkl = (key) => {

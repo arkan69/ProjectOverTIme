@@ -92,8 +92,11 @@
                 "data": null,
                 "render": function (data, type, row) {
                     var getNik = row['id'];
+                    if (row['status'] == 3) {
+                        var Status = 'Disabled';
+                    }
                     return `<div class="btn-group d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalFinance" title="Detail">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailfinance('${getNik}')" data-bs-target="#detailModalFinance" title="Detail" ${Status}>
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -228,3 +231,19 @@ $("#btnDoneFinance").click(function (e) {
         }
     })
 });
+
+
+var downloadButton = document.getElementById("download-pdf-finance");
+if (downloadButton) {
+    downloadButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        var image = document.getElementById("imgElemF");
+        var base64string = image.src;
+        var link = document.createElement("a");
+        link.download = "filebukti.pdf";
+        link.href = base64string;
+        link.click();
+    })
+} else {
+    console.error('Elemen tidak ditemukan');
+};
