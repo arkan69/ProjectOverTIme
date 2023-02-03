@@ -131,7 +131,7 @@
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                     &nbsp;
-                                    <button type="button" class="btn btn-danger" onclick="DeleteSpkl('${getNik}')" ${Status}>
+                                    <button type="button" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" onclick="DeleteSpkl('${getNik}')" ${Status}>
                                         <span class="fas fa-trash"></span>
                                     </button>
                                 </div>
