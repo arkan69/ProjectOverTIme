@@ -65,7 +65,7 @@
                 "render": function (data, type, row) {
                     var getNik = row['nik'];
                     return `<div class="btn-group">
-                                    <button type="button" class="btn btn-warning fas fa-edit" data-bs-toggle="modal" onclick="updateEmployee('${getNik}')" data-bs-target="#insertModal" title="Detail">
+                                    <button type="button" class="btn btn-warning fas fa-edit" data-bs-toggle="modal" data-toggle="tooltip" onclick="updateEmployee('${getNik}')" data-bs-target="#insertModal" data-placement="top" title="Detail">
                                     </button>
                                     &nbsp;
                                     <button type="button" class="btn btn-danger fas fa-trash" onclick="Delete('${getNik}')" title="Delete"">
@@ -87,6 +87,11 @@
                 className: 'btn btn-success mb-3 fa-solid fa-file-excel p-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to Excel',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
                 }
             },
             {
@@ -96,6 +101,11 @@
                 className: 'btn btn-warning mb-3 fa-solid fa-file-csv p-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to CSV',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
                 }
             },
             {
@@ -105,6 +115,11 @@
                 className: 'btn btn-danger mb-3 fa-solid fa-file-pdf p-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to PDF',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
                 }
             }
         ]

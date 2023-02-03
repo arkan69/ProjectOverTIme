@@ -84,7 +84,7 @@
                 "render": function (data, type, row) {
                     var getNik = row['id'];
                     return `<div class="btn-group d-flex justify-content-center">
-                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager" title="Detail">
+                                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-toggle="tooltip" onclick="detailmanager('${getNik}')" data-bs-target="#detailModalManager" data-placement="top" title="Detail">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                 </div>
@@ -102,6 +102,11 @@
                 className: 'btn btn-success mb-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to Excel',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
                 }
             },
             {
@@ -109,6 +114,11 @@
                 className: 'btn btn-warning mb-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to CSV',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
                 }
             },
             {
@@ -116,6 +126,11 @@
                 className: 'btn btn-info mb-3',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to PDF',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
                 }
             }
         ]

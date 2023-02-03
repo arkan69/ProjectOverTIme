@@ -1,5 +1,45 @@
 ﻿//$(document).ready(function () {
     var table_splk = $("#table_splk").DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+
+            {
+                extend: 'excelHtml5',
+                className: 'btn btn-success mb-3',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to Excel',
+                    'data-bs-toggle': 'tooltip',
+                    'data-bs-placement': 'top'
+                }
+            },
+            {
+                extend: 'csvHtml5',
+                className: 'btn btn-warning mb-3',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to CSV',
+                    'data-bs-toggle': 'tooltip',
+                    'data-bs-placement': 'top'
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'btn btn-info mb-3',
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                },
+                attr: {
+                    title: 'Export to PDF',
+                    'data-toggle': 'tooltip',
+                    'data-placement': 'top'
+                }
+            }
+        ],
         ajax: {
             "url": "../Employee/GetMasterEmployee",
             "dataType": "Json",
@@ -87,7 +127,7 @@
                         var Status = 'Disabled';
                     }
                     return `<div class="btn-group">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal" title="Detail">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-toggle="tooltip" onclick="detailSplk('${getNik}')" data-bs-target="#detailModal" data-placement="top" title="Detail" title="Detail">
                                         <span class="fas fa-magnifying-glass"></span>
                                     </button>
                                     &nbsp;
@@ -101,31 +141,8 @@
             }
         ],
 
-        dom: '<"top"Blf>rtip',
-        buttons: [
-
-            {
-                extend: 'excelHtml5',
-                className: 'btn btn-success mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                }
-            },
-            {
-                extend: 'csvHtml5',
-                className: 'btn btn-warning mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                className: 'btn btn-info mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                }
-            }
-        ]
+        //dom: '<"top"Blf>rtip',
+        
     });
 //});
 
@@ -302,7 +319,7 @@ function InsertSplkForm() {
             }).done((result) => {
                 Swal.fire(
                     'Success',
-                    "Data Berhasil ditambahkan",
+                    "Request added Successfully",
                     'success'
                 )
                 $('.insertModalSplk').modal('hide');
