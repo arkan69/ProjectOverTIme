@@ -92,50 +92,6 @@
                 },
                 "orderable": false
             }
-<<<<<<< Updated upstream
-        ],
-
-        dom: '<"top"Blf>rtip',
-        buttons: [
-
-            {
-                extend: 'excelHtml5',
-                className: 'btn btn-success mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                },
-                attr: {
-                    title: 'Export to Excel',
-                    'data-toggle': 'tooltip',
-                    'data-placement': 'top'
-                }
-            },
-            {
-                extend: 'csvHtml5',
-                className: 'btn btn-warning mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                },
-                attr: {
-                    title: 'Export to CSV',
-                    'data-toggle': 'tooltip',
-                    'data-placement': 'top'
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                className: 'btn btn-danger mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                },
-                attr: {
-                    title: 'Export to PDF',
-                    'data-toggle': 'tooltip',
-                    'data-placement': 'top'
-                }
-            }
-=======
->>>>>>> Stashed changes
         ]
     });
 //});
