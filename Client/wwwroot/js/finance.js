@@ -8,7 +8,7 @@
                 className: 'btn btn-success mb-3 fa-solid fa-file-excel fa-2x px-4',
                 text:'',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    columns: ':visible'
                 },
                 attr: {
                     title: 'Export to Excel',
@@ -21,7 +21,7 @@
                 className: 'btn btn-warning mb-3 fa-solid fa-file-csv fa-2x px-4',
                 text: '',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    columns: ':visible'
                 },
                 attr: {
                     title: 'Export to CSV',
@@ -34,12 +34,21 @@
                 className: 'btn btn-danger mb-3 fa-solid fa-file-pdf fa-2x px-4',
                 text: '',
                 exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    columns: ':visible'
                 },
                 attr: {
                     title: 'Export to PDF',
                     'data-toggle': 'tooltip',
                     'data-placement': 'top'
+                }
+            },
+            {
+                extend: 'colvis',
+                className: 'btn btn-dark fa-1x',
+                attr: {
+                    title: 'Ignore Column',
+                    'data-bs-toggle': 'tooltip',
+                    'data-bs-placement': 'top'
                 }
             }
         ],
