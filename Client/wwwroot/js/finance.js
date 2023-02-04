@@ -5,7 +5,8 @@
 
             {
                 extend: 'excelHtml5',
-                className: 'btn btn-success mb-3',
+                className: 'btn btn-success mb-3 fa-solid fa-file-excel fa-2x px-4',
+                text:'',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 },
@@ -17,7 +18,8 @@
             },
             {
                 extend: 'csvHtml5',
-                className: 'btn btn-warning mb-3',
+                className: 'btn btn-warning mb-3 fa-solid fa-file-csv fa-2x px-4',
+                text: '',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 },
@@ -29,7 +31,8 @@
             },
             {
                 extend: 'pdfHtml5',
-                className: 'btn btn-danger mb-3',
+                className: 'btn btn-danger mb-3 fa-solid fa-file-pdf fa-2x px-4',
+                text: '',
                 exportOptions: {
                     columns: [0, 1, 2, 3, 4, 5, 6, 7]
                 },

@@ -1,45 +1,5 @@
 ﻿//$(document).ready(function () {
     var table_splk = $("#table_splk").DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-
-            {
-                extend: 'excelHtml5',
-                className: 'btn btn-success mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                },
-                attr: {
-                    title: 'Export to Excel',
-                    'data-bs-toggle': 'tooltip',
-                    'data-bs-placement': 'top'
-                }
-            },
-            {
-                extend: 'csvHtml5',
-                className: 'btn btn-warning mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                },
-                attr: {
-                    title: 'Export to CSV',
-                    'data-bs-toggle': 'tooltip',
-                    'data-bs-placement': 'top'
-                }
-            },
-            {
-                extend: 'pdfHtml5',
-                className: 'btn btn-info mb-3',
-                exportOptions: {
-                    columns: [0, 1, 2, 3, 4, 5, 6, 7]
-                },
-                attr: {
-                    title: 'Export to PDF',
-                    'data-toggle': 'tooltip',
-                    'data-placement': 'top'
-                }
-            }
-        ],
         ajax: {
             "url": "../Employee/GetMasterEmployee",
             "dataType": "Json",

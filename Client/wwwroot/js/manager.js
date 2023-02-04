@@ -92,6 +92,7 @@
                 },
                 "orderable": false
             }
+<<<<<<< Updated upstream
         ],
 
         dom: '<"top"Blf>rtip',
@@ -133,6 +134,8 @@
                     'data-placement': 'top'
                 }
             }
+=======
+>>>>>>> Stashed changes
         ]
     });
 //});
@@ -245,7 +248,7 @@ $("#btnApprovedManager").click(function (e) {
 $("#btnRejectedManager").click(function (e) {
     e.preventDefault();
     Swal.fire({
-        title: 'Sure want to Rejected this request?',
+        title: 'Sure want to Reject this request?',
         text: "Request form will be Rejected.",
         icon: 'warning',
         showCancelButton: true,
